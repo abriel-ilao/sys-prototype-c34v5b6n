@@ -1,0 +1,53 @@
+html,
+body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  background-color: #f5f5f5;
+}
+
+.h4 {
+  color:#006266;
+}
+
+.pattern-lock {
+  width: 100%;
+  max-width: 300px;
+  padding: 25px;
+  margin: auto;
+  background-color:#ffffff;
+  border:1px solid silver;
+}
+#err-msg, #succ-msg {
+  display:none;
+  margin-top:30px;
+  padding:20px;
+  text-align:center;
+  color:#ffffff;
+  font-size:20px;
+}
+#err-msg {
+    background-color:red;
+}
+#succ-msg {
+    background-color:green;
+}
+#attempts {
+    margin-top:8px;
+    padding:5px;
+    background-color:#f5f5f5;
+    display:none;
+}
+
+
+
+
+

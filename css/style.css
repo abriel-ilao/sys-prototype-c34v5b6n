@@ -1,0 +1,210 @@
+body {
+	font-family: 'Roboto', sans-serif, 'Tahoma';
+	color:#0c5460;
+}
+input:focus { 
+    background-color: yellow;
+}
+table {
+	background-color:#ffffff !important;
+}
+
+.panel-x {
+	background-color:#ffffff;
+	border:1px solid #dcdde1;
+	padding-top:20px;
+	padding-left:30px;
+	padding-right:30px;
+	padding-bottom:20px;
+	border-radius:2px;
+}
+.header-bg {
+	background-color:#ffffff;
+}
+.logo-brand {
+
+}
+.account-menu ul {
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+.account-menu ul li {
+	display:inline-block;
+	padding-right:20px;
+	padding-top:8px;
+}
+.account-menu ul li a:link {
+	color:#0c5460;
+}
+.account-menu ul li a:visited {
+	color:#0c5460;
+}
+.account-menu ul li a:active {
+	color:#0c5460;
+}
+.account-menu .user-admin {
+	color:#0c5460;
+}
+.inventory-item-notification-text {
+	padding-top:8px;
+	color:#0c5460;
+}
+.inventory-item-notification-text a:link {
+	color:#0c5460;
+}
+.inventory-item-notification-text a:visited {
+	color:#0c5460;
+}
+.inventory-item-notification-text a:active {
+	color:#0c5460;
+}
+.nav-main-menu {
+	color:#ffffff;
+	background-color:#0c5460;
+}
+.nav-main-menu .active-highlight {
+	border-left:3px solid #ffffff;
+}
+.search-pos {
+	margin-top:-24px;
+	padding:10px;
+	background-color:#d1ecf1;
+	border-bottom:1px solid #bdc3c7;
+}
+
+/* msg prompt */
+.msg-success, .msg-error {
+
+}
+
+/* fa close */
+.fa-close {
+	cursor:pointer;
+}
+/* Page Loading */
+.please-wait {
+    position: fixed;
+    left: 45%;
+    top: 35%;
+    display: none;
+    z-index: 1000;
+    height: 31px;
+    width: 130px;
+    background-color:white;
+    text-align:center;
+}
+.wrapper-please-wait {
+	top:0;
+	position:fixed;
+	z-index:99999;
+	background-image:url('../img/35.png');
+	min-width:100%;
+	min-height:100%;
+}
+/* POS */
+.inventory-item-notificaton-num {
+	font-weight:500;
+	font-size:13px;
+	margin-top:8px;
+	margin-right:3px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:2px;
+	padding-bottom:2px;
+	background-color:red;
+	color:#ffffff;
+	border-radius:3px;
+}
+.inventory-item-notification-text a:link {
+	color:#0c5460;
+}
+.inventory-item-notification-text a:visited {
+	color:#0c5460;
+}
+.inventory-item-notification-text a:active {
+	color:#0c5460;
+}
+
+.pos-sub-item ul {
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+
+.pos-sub-item ul li {
+	display:inline-block;
+	padding-right:20px;
+	padding-top:8px;
+}
+.pos-sub-item ul li a:link {
+	color:#0c5460;
+}
+.pos-sub-item ul li a:visited {
+	color:#0c5460;
+}
+.pos-sub-item ul li a:active {
+	color:#0c5460;
+}
+.pos-sub-item .active-sub-item {
+	border-left:4px solid #0c5460;
+	padding-left:7px;
+}
+.pos-item-success ul {
+	list-style-type:none;
+}
+.h-inventory {
+	padding-bottom:5px;
+	margin-bottom:15px;
+	border-bottom:1px solid #cfe2e6;
+	font-weight:500;
+}
+.inventory-purchased-available-stock {
+	margin-top:5px;
+	font-size:13px;
+	font-weight:700;
+	color:red;
+	display:none;
+}
+.p-s-1 {
+	padding-right:5px;
+	font-size:14px;
+}
+.p-s-2 {
+	padding-left:5px;
+	font-size:14px;
+	font-weight:500;
+}
+.page-link-color {
+	color:#0c5460;
+}
+.page-link-color-active {
+	color:#ffffff;
+}
+.page-link-active {
+	background-color:#0c5460;
+}
+.p-item-success {
+	display:none;
+}
+.item-del {
+	color:red;
+}
+.item-edit {
+	color:blue;
+}
+.modal-txt {
+	font-size:13px;
+	padding-top:8px;
+	padding-bottom:8px;
+	padding-right:5px;
+	border-bottom:1px solid lightgray;
+}
+span#totalItems {
+	font-weight:700;
+}
+/* Change Pass */
+.p-note {
+	font-size:14px;
+}
+
