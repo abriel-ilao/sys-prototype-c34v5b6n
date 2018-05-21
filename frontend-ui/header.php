@@ -2,7 +2,8 @@
 
 use app\controller\accounts\AccountsAdminInfoController;
 
-class Header {
+class Header 
+{
     public static function Create($active) { return new Header($active); }   
     public function __clone() {}
     public function __construct($active) {

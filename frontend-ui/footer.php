@@ -1,5 +1,7 @@
 <?php 
-class Footer {
+
+class Footer 
+{
     public static function Create() { return new Footer; }   
     public function __clone() {}
     public function __construct() {
