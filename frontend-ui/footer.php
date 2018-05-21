@@ -27,9 +27,9 @@ class Footer
                    $(backToTop).slideUp(300);
                 }
 
-                //console.log($(window).scrollTop());
-                //console.log($(document).height());
-                //console.log($(window).height());
+                    //console.log($(window).scrollTop());
+                    //console.log($(document).height());
+                    //console.log($(window).height());
             });
             //smooth
             $(scrollSmooth).on('click', 'a', function (event) {
