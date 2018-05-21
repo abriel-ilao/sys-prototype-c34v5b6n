@@ -1,0 +1,184 @@
+/*** Custom Mixins ***/
+
+@mixin __border_radius($radius) {
+    -moz-border-radius:$radius !important;
+ -webkit-border-radius:$radius !important;
+     -ms-border-radius:$radius !important;
+      -o-border-radius:$radius !important;
+         border-radius:$radius !important;
+}
+
+@mixin __link($link_and_visited, $hover) {
+    & a:link {
+        color:$link_and_visited;
+    }
+    & a:visited {
+        color:$link_and_visited;
+    }
+    & a:hover {
+        color:$hover;
+    }
+}
+
+@mixin __link_background_color($link_and_visited, $hover) {
+    & a:link {
+        background-color:$link_and_visited;
+    }
+    & a:visited {
+        background-color:$link_and_visited;
+    }
+    & a:hover {
+        background-color:$hover;
+    }
+}
+
+@mixin ___font($size, $weight, $style) {
+    font-size:$size;
+    font-weight:$weight;
+    font-style:$style;
+}
+
+@mixin __color($color) {
+    color:$color;
+}
+
+@mixin __font_size($size) {
+    font-size:$size;
+}
+
+@mixin __font_weight($weight) {
+    font-weight:$weight;
+}
+
+@mixin __font_style($style) {
+    font-style:$style;
+}
+
+@mixin __line_height($line-height) {
+    line-height:$line-height;
+}
+
+@mixin __text_align($text-align) {
+    text-align:$text-align;
+}
+
+@mixin __text_indent($text-indent) {
+    text-indent:$text-indent;
+}
+
+@mixin __list_style_type($type) {
+    list-style-type:$type;
+}
+
+@mixin __float($float) 
+{
+    float:$float;
+}
+
+@mixin __display($display) {
+    display:$display;
+}
+
+@mixin __width($width) {
+    width:$width;
+}        
+
+@mixin __height($height) {
+    height:$height;
+}
+
+@mixin __cursor($cursor) {
+    cursor:$cursor;
+}
+
+//value = solid || dashed, etc...
+@mixin __border($size, $value, $color, $position) {
+    @if $position == 'all' {
+        border:$size $value $color;
+    } @else if $position == 'top' {
+        border-top:$size $value $color;
+    } @else if $position == 'bottom' {
+        border-bottom:$size $value $color;
+    } @else if $position == 'right' {
+        border-right:$size $value $color;
+    } @else if $position == 'left' {
+        border-left:$size $value $color;
+    } 
+}
+
+@mixin __padding($set, $position) {
+    @if $position == 'all' {  
+        padding:$set;
+    } @else if $position == 'top' {
+        padding-top:$set;
+    } @else if $position == 'bottom' {
+        padding-bottom:$set;
+    } @else if $position == 'right' {
+        padding-right:$set;
+    } @else if $position == 'left' {  
+        padding-left:$set;
+    }
+}
+
+@mixin __margin($set, $position) {
+    @if $position == 'all' {  
+        margin:$set;
+    } @else if $position == 'top' {
+        margin-top:$set;
+    } @else if $position == 'bottom' {
+        margin-bottom:$set;
+    } @else if $position == 'right' {
+        margin-right:$set;
+    } @else if $position == 'left' {  
+        margin-left:$set;
+    }
+}
+
+@mixin __top($top) {
+    top:$top;
+}
+
+@mixin __bottom($bottom) {
+    bottom:$bottom;
+}
+
+@mixin __left($left) {
+    left:$left;
+}
+
+@mixin __right($right) {
+    right:$right;
+}
+
+@mixin __position($position) {
+    position:$position;
+}
+
+@mixin __z_index($z-index) {
+    z-index:$z-index;
+}
+
+@mixin __opacity($opacity) {
+    opacity:$opacity;
+}
+
+@mixin __background_size($value){
+    -webkit-background-size: $value;
+    -moz-background-size: $value;
+    -o-background-size: $value;
+    background-size: $value;
+}
+
+@mixin __background($background) {
+    background-image:url($background);
+}
+
+@mixin __background_color($background-color) {
+    background-color:$background-color;
+}
+
+@mixin __background_repeat($background-repeat) {
+    background-repeat:$background-repeat;
+}
+
+

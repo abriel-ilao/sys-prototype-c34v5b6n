@@ -1,0 +1,62 @@
+/*** Forms ***/
+/************************
+*   Custom Button
+************************/
+/* cross compatibility */
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+    border:0;
+    padding:0;
+} 
+
+/* input/button cursor type */
+input[type="submit"].button,
+button.button {
+    cursor:pointer;
+    outline:none;
+}
+
+/* customizing css button */
+.button {
+    padding:8px 16px;
+    display:inline-block;
+    text-decoration:none;
+    border:0;
+    margin:0;
+    @include __border_radius(3px);
+}
+
+/* sizing */
+.button-tiny {
+    font-size:12px;
+    padding:6px 14px;
+}
+
+.button-medium {
+    font-size:16px;
+    padding:10px 18px;
+}
+
+.button-large {
+    font-size:18px;
+    padding:12px 20px;
+}
+
+.button-extra-large {
+    padding:16px 26px; 
+}
+
+/* hover over */
+/*.button-primary:hover {
+    background:lightslategrey;
+}
+
+.button-white {
+    background:#ffffff;
+}
+
+
+.button-white:hover {
+    background:#ffffff;
+}
+*/

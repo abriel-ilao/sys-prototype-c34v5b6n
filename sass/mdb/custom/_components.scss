@@ -1,0 +1,232 @@
+/** COLOUR SETTINGS **/
+
+$color-a:#d6dbdf;
+$color-b:#28b463;
+$color-c:#1d8348;
+$color-d:#3498db;
+$color-e:#2874a6;
+
+$white-color:#ffffff;
+$black-color:#000000;
+
+//Gray and Silver Family Colors - flat UI colors
+//CLOUDS                //SILVER                //CONCRETE                  //ASBESTOS
+$clouds-1:#fdfefe;      $silver-1:#f8f9f9;      $concrete-1:#f4f6f6;        $asbestos-1:#f2f4f4;        
+$clouds-2:#fbfcfc;      $silver-2:#f2f3f4;      $concrete-2:#eaeded;        $asbestos-2:#e5e8e8;
+$clouds-3:#f7f9f9;      $silver-3:#e5e7e9;      $concrete-3:#d5dbdb;        $asbestos-3:#ccd1d1;
+$clouds-4:#f4f6f7;      $silver-4:#d7dbdd;      $concrete-4:#bfc9ca;        $asbestos-4:#b2babb;
+$clouds-5:#f0f3f4;      $silver-5:#cacfd2;      $concrete-5:#aab7b8;        $asbestos-5:#99a3a4;
+$clouds-6:#ecf0f1;      $silver-6:#bdc3c7;      $concrete-6:#95a5a6;        $asbestos-6:#7f8c8d;
+$clouds-7:#d0d3d4;      $silver-7:#a6acaf;      $concrete-7:#839192;        $asbestos-7:#707b7c;
+$clouds-8:#b3b6b7;      $silver-8:#909497;      $concrete-8:#717d7e;        $asbestos-8:#616a6b;
+$clouds-9:#979a9a;      $silver-9:#797d7f;      $concrete-9:#5f6a6a;        $asbestos-9:#515a5a;
+$clouds-10:#7b7d7d;     $silver-10:#626567;     $concrete-10:#4d5656;       $asbestos-10:#424949;
+
+body 
+{
+    //font-family:Ubuntu, Sans-Serif;
+    @include  __background_color($clouds-7);
+}
+
+/*** Extends ***/
+.__class_mp_0 
+{
+    margin:0;
+    padding:0;
+}
+
+.__class_list
+{
+    & ul 
+    {
+        @include __list_style_type(none);
+    }
+}
+
+.__class_list_inline 
+{
+    & ul 
+    {
+        @include __list_style_type(none);
+        & li 
+        {
+            @include __display(inline-block);
+        }
+    }
+}
+
+/*** Mixins ***/
+/*** custom font settings ***/
+@mixin __font($size, $weight, $style, $color) 
+{
+    @include ___font($size, $weight, $style);   
+    @include __color($color);
+    
+    @extend .__class_mp_0; 
+}
+
+/*** top and bottom padding ***/
+@mixin __padding_tb($size_top, $size_bottom) 
+{
+    @include __padding($size_top, top);
+    @include __padding($size_bottom, bottom);
+}
+
+/*** left and right padding ***/
+@mixin __padding_lr($size_left, $size_right) 
+{
+    @include __padding($size_left, left);
+    @include __padding($size_right, right);
+}
+
+/*** top and bottom margin ***/
+@mixin __margin_tb($size_top, $size_bottom) 
+{
+    @include __margin($size_top, top);
+    @include __margin($size_bottom, bottom);
+}
+
+/*** left and right margin ***/
+@mixin __margin_lr($size_left, $size_right) 
+{
+    @include __margin($size_left, left);
+    @include __margin($size_right, right);
+}
+
+section.cards
+{
+    & .card-custom
+    {
+        @include __background_color($white-color);
+
+        & .figure-wrapper
+        {
+            @include __padding_lr(0.5rem, 0.5rem);
+            @include __padding_tb(0.5rem, 0);
+        }
+
+        & .figure-wrapper-group
+        {
+            @include __padding_lr(0.5rem, 0.5rem);
+            @include __padding_tb(0, 0.5rem);   
+        }
+
+        & .img-wrapper
+        {
+            @include __padding(0.2rem, all);
+            text-align:center;
+        }
+
+        & .button-wrapper  
+        {
+            @include __padding_tb(1rem, 1rem);
+            @include __link($white-color, $white-color);
+            
+            & .button-a 
+            {
+                @include ___font(1rem, 300, normal);
+                @include __margin(4px, right);
+                //@include __border(1px, solid, $black-color, all);
+                @include __background_color($color-d);
+                @include __border_radius(3px);
+            }
+
+            & .button-b {
+                @include ___font(1rem, 300, normal);
+                @include __margin(4px, right);
+                //@include __border(1px, solid, $black-color, all);
+                @include __background_color($color-b);
+                @include __border_radius(3px);
+            }
+
+            & .button-c {
+                @include ___font(1rem, 300, normal);
+                @include __margin(4px, right);
+                //@include __border(1px, solid, $black-color, all);
+                @include __background_color($silver-7);
+                @include __border_radius(3px);
+            }
+
+            & .button-a:hover 
+            {
+                @include __background_color($color-e);
+            }     
+
+            & .button-b:hover 
+            {
+                @include __background_color($color-c);
+            }
+
+        }
+        
+        & .img-hero
+        {
+            @include __opacity(1 !important);
+        }
+
+        & .img-focus
+        {
+            width:100%;
+            @include __opacity(0.5);
+        }
+
+        & .img-focus:hover
+        {
+            @include __opacity(1);
+        }
+    }
+}
+
+
+.back-to-top {
+   @include __cursor(pointer);
+   @include __color($white-color);
+   @include __position(fixed);
+   @include __right(10px);
+   @include __bottom(10px);
+   @include __background_color($color-a);
+   @include __z_index(9999);
+   @include __display(none);
+   @include __padding(10px, left);
+   @include __padding(10px, right);
+   @include __padding(5px, top);
+   @include __padding(5px, bottom);
+   @include __border_radius(100%);
+} 
+
+
+/* Animation SCSS */
+.come-in {
+  -webkit-transform: translateY(150px);
+      -ms-transform: translateY(150px);
+          transform: translateY(150px);
+  -webkit-animation: come-in 0.8s ease forwards;
+          animation: come-in 0.8s ease forwards;
+}
+
+.come-in:nth-child(odd) {
+  -webkit-animation-duration: 0.6s;
+          animation-duration: 0.6s;
+}
+
+.already-visible {
+  -webkit-transform: translateY(0);
+      -ms-transform: translateY(0);
+          transform: translateY(0);
+  -webkit-animation: none;
+          animation: none;
+}
+
+@-webkit-keyframes come-in {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}
+
+@keyframes come-in {
+  to {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+}

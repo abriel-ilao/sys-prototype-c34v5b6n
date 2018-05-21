@@ -2,9 +2,6 @@ body {
 	font-family: 'Roboto', sans-serif, 'Tahoma';
 	color:#0c5460;
 }
-input:focus { 
-    background-color: yellow;
-}
 table {
 	background-color:#ffffff !important;
 }
