@@ -1,7 +1,5 @@
 <?php 
-
-class Footer 
-{
+class Footer {
     public static function Create() { return new Footer; }   
     public function __clone() {}
     public function __construct() {
@@ -27,9 +25,9 @@ class Footer
                    $(backToTop).slideUp(300);
                 }
 
-                    //console.log($(window).scrollTop());
-                    //console.log($(document).height());
-                    //console.log($(window).height());
+                //console.log($(window).scrollTop());
+                //console.log($(document).height());
+                //console.log($(window).height());
             });
             //smooth
             $(scrollSmooth).on('click', 'a', function (event) {

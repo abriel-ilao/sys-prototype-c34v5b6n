@@ -2,8 +2,7 @@
 
 use app\controller\accounts\AccountsAdminInfoController;
 
-class Header 
-{
+class Header {
     public static function Create($active) { return new Header($active); }   
     public function __clone() {}
     public function __construct($active) {
@@ -31,7 +30,6 @@ class Header
 <!doctype html>
 <html lang="en">
   <head>
-    
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -73,7 +71,9 @@ class Header
                 </div>
                 <div class="col-12 col-md-2">
                     <div class="logo-brand">
+                        <?php if($level == 1 || $level == 2): ?>
                         <div class="inventory-item-notificaton-num float-left"></div><div class="inventory-item-notification-text float-left"><a href="notify" class="show-please-wait">Item(s)</a></div>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="col-12 col-md-8">
