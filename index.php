@@ -7,7 +7,7 @@ Flight::route('/test', function(){
 });
 
 Flight::route('/', function(){
-    echo 'hello developers! the index page is still under development!';
+    include 'loremipsum.php';
 });
 
 Flight::route('/locked', function(){

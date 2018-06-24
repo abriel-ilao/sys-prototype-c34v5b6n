@@ -24,6 +24,9 @@ namespace app\model\accounts
 		}
 		private function __clone() {}
 
+		/**
+		* Create, Read(retrieve), Update, Delete
+		*/
 		public function createData() {
 			throw new \Exception('Not supported yet.'); 
 		}
@@ -48,6 +51,7 @@ namespace app\model\accounts
 			if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 			    $session_id = $row['id'];
 				Session::CreateSession($id, $session_id);
+				//header('Location: pos.php');
 				echo '<div class="p-1 mt-3 mb-3 bg-success text-white">Please wait...</div>';
 				echo '<style>*{pointer-events:none;}</style>';
 				return '<meta http-equiv="refresh" content="2">';

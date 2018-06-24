@@ -77,21 +77,39 @@ Header::Create($active);
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Type:</label>
+                            <div class="col-sm-8">
+                              <select name="material_type" id="material_type" class="form-control form-control-sm">
+                                <option value="aaa">AAA</option>
+                                <option value="bbb">BBB</option>
+                                <option value="ccc">CCC</option>
+                                <option value="ddd">DDD</option>
+                                <option value="eee">EEE</option>
+                              </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Purchased stock:</label>
                             <div class="col-sm-4">
                               <input type="number" name="purchased_stock" id="purchased_stock" class="form-control form-control-sm" placeholder="Purchased stock" required>
                             </div>
                         </div>
-                        <!--<div class="form-group row">
-                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Available stock:</label>
-                            <div class="col-sm-8">
-                              <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Available stock">
-                            </div>
-                        </div>-->
                         <div class="form-group row">
                             <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Buying price:</label>
                             <div class="col-sm-4">
                               <input type="number" step="0.01" name="buying_price" id="buying_price" class="form-control form-control-sm" placeholder="Buying price" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Trucking fee:</label>
+                            <div class="col-sm-4">
+                              <input type="number" step="0.01" name="trucking_fee" id="trucking_fee" class="form-control form-control-sm" placeholder="Trucking fee" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Monthly expenses:</label>
+                            <div class="col-sm-4">
+                              <input type="number" step="0.01" name="monthly_expenses" id="monthly_expenses" class="form-control form-control-sm" placeholder="Monthly expenses" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -106,19 +124,6 @@ Header::Create($active);
                               <button type="submit" id="submit-save" class="btn btn-info float-right"><i class="fa fa-cart-arrow-down"></i> Add Item</button>
                             </div>
                         </div>
-
-                      <!--<div class="form-group row">
-                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Total Capital:</label>
-                        <div class="col-sm-8 col-sm-8 col-md-4">
-                          <span style="font-size:13px;">P123</span>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Total profit:</label>
-                        <div class="col-sm-8 col-sm-8 col-md-4">
-                          <span style="font-size:13px;">P234</span>
-                        </div>
-                      </div>-->
                     </form>
                 </div>
                 <div class="item-info col-12 col-lg-6">
@@ -140,6 +145,14 @@ Header::Create($active);
                         </div>
                         <div class="col-6">
                             <p id="p-description" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            <p class="p-s-1 text-right">Type:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-material-type" class="p-s-2 text-left"></p>
                         </div>
                     </div>
                     <div class="row no-gutters">
@@ -168,6 +181,22 @@ Header::Create($active);
                     </div>
                     <div class="row no-gutters">
                         <div class="col-6">
+                            <p class="p-s-1 text-right">Trucking fee:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-trucking-fee" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            <p class="p-s-1 text-right">Monthly expenses:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-monthly-expenses" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
                             <p class="p-s-1 text-right">Selling price:</p>
                         </div>
                         <div class="col-6">
@@ -176,18 +205,18 @@ Header::Create($active);
                     </div>
                     <div class="row no-gutters">
                         <div class="col-6">
-                            <p class="p-s-1 text-right">Total capital:</p>
+                            <p class="p-s-1 text-right">Profit:</p>
                         </div>
                         <div class="col-6">
-                            <p id="p-total-capital" class="p-s-2 text-left"></p>
+                            <p id="p-profit" class="p-s-2 text-left"></p>
                         </div>
                     </div>
                     <div class="row no-gutters">
                         <div class="col-6">
-                            <p class="p-s-1 text-right">Total profit:</p>
+                            <p class="p-s-1 text-right">Overall profit:</p>
                         </div>
                         <div class="col-6">
-                            <p id="p-total-profit" class="p-s-2 text-left"></p>
+                            <p id="p-overall-profit" class="p-s-2 text-left"></p>
                         </div>
                     </div>                
                 </div>
@@ -247,8 +276,11 @@ Footer::Create();
 
                 var item_code = $('#item_code').val(),
                     description = $('#description').val(),
+                    material_type = $('#material_type').val(),
                     purchased_stock = $('#purchased_stock').val(),
                     buying_price = $('#buying_price').val(),
+                    trucking_fee = $('#trucking_fee').val(),
+                    monthly_expenses = $('#monthly_expenses').val(),
                     selling_price = $('#selling_price').val(); 
 
                 //preventing a page refresh
@@ -265,7 +297,7 @@ Footer::Create();
                 $.ajax({
                     url: "server-ajax/inventoryajax", 
                     type: "POST",
-                    data: $('#item_code, #description, #purchased_stock, #buying_price, #selling_price').serialize(), 
+                    data: $('#item_code, #description, #material_type, #purchased_stock, #buying_price, #trucking_fee, #monthly_expenses, #selling_price').serialize(), 
                     success: function() {
                         //show item log
                         $('.p-item-success').fadeIn();
@@ -278,20 +310,20 @@ Footer::Create();
                         //show item details
                         $('#p-item-code').text(item_code);
                         $('#p-description').text(__ucwords(__strtolower(description)));
+                        $('#p-material-type').text(material_type);
                         $('#p-purchased-stock').text(purchased_stock);
                         $('#p-available-stock').text(purchased_stock);
                         $('#p-buying-price').text('₱' + buying_price);
+                        $('#p-trucking-fee').text('₱' + trucking_fee);
+                        $('#p-monthly-expenses').text('₱' + monthly_expenses);
                         $('#p-selling-price').text('₱' + selling_price);
 
-                        //total capital = (buying price * quantity)
-                        var t_capital = (buying_price * purchased_stock);
-
-                        //total profit = (selling price * quantity)
-                        var t_profit = (selling_price * purchased_stock);
+                        var computeProfit = (selling_price - buying_price - trucking_fee - monthly_expenses);
+                        var computeOverallProfit = (computeProfit * purchased_stock);
 
                         //show total capital and profit
-                        $('#p-total-capital').text('₱' + Number(t_capital).toFixed(1));
-                        $('#p-total-profit').text('₱' + Number(t_profit).toFixed(1));
+                        $('#p-profit').text('₱' + Number(computeProfit).toFixed(1));
+                        $('#p-overall-profit').text('₱' + Number(computeOverallProfit).toFixed(1));
 
                         //clear inputs
                         $("input").val('');

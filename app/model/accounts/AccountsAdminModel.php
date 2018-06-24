@@ -3,7 +3,7 @@
 namespace app\model\accounts 
 {
 	class AccountsAdminModel {
-
+   
 		private $_id, 
 				$_username, 
 				$_password,

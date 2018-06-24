@@ -51,7 +51,7 @@ $newquery = $paginate->paging($sql, $records_per_page);
                     <div class="col-auto">
                       <label class="sr-only" for="inlineFormInputGroup">Search Item (Inventory)</label>
                       <div class="input-group">                         
-                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search Items (POS)">
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search Items (Inventory)">
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
@@ -94,13 +94,24 @@ $newquery = $paginate->paging($sql, $records_per_page);
 							<?php endif; ?>
 							<th scope="col">Item code</th>
 							<th scope="col">Description</th>
-							<th scope="col">Purchased stock</th>
-							<th scope="col">Available stock</th>
-							<th scope="col">Buying price</th>
-							<th scope="col">Selling price</th>
-							<th scope="col">Total capital</th>
-							<th scope="col">Total profit</th>
-							<th scope="col">Date added</th>
+							<th scope="col">Type</th>
+							<?php if($level == 1 || $level == 2) : ?>
+							<th scope="col">PS</th>
+							<th scope="col">AS</th>
+							<th scope="col">BP</th>
+							<th scope="col">TF</th>
+							<th scope="col">ME</th>
+							<?php endif; ?>
+							<?php if($level == 1 || $level == 2) : ?>
+							<th scope="col">SP</th>
+							<?php else: ?>
+							<th scope="col">Selling Price</th>
+							<?php endif;?>
+							<?php if($level == 1 || $level == 2) : ?>
+							<th scope="col">Profit</th>
+							<th scope="col">OP</th>
+							<th scope="col">Date Added</th>
+							<?php endif; ?>
 						</tr>
 						</thead>
 						<tbody>

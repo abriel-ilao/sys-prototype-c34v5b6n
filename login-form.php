@@ -1,5 +1,13 @@
 <?php 
 
+if(!isset($_COOKIE['e1ee8d72a7a553f68c2ce3beb7ad19c9'])) :
+    require_once './frontend-ui/password.php';
+    //init pattern lock
+    Password::Create();
+    //prevent displaying the main page
+    die();
+endif;
+
 $token = bin2hex(openssl_random_pseudo_bytes(16));
 setcookie("CSRFtoken", $token, time() + 60 * 60 * 24);
 

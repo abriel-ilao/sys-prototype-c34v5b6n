@@ -29,6 +29,9 @@ namespace app\model\accounts
 		}
 		private function __clone() {}
 
+		/**
+		* Create, Read(retrieve), Update, Delete
+		*/
 		public function createData() {
 			throw new \Exception('Not supported yet.'); 
 		}
