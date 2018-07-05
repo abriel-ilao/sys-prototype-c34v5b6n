@@ -1,6 +1,7 @@
 body {
 	font-family: 'Roboto', sans-serif, 'Tahoma';
 	color:#0c5460;
+	height:100%;
 }
 table {
 	background-color:#ffffff !important;
@@ -18,8 +19,8 @@ table {
 .header-bg {
 	background-color:#ffffff;
 }
-.logo-brand {
-
+.logo-brand a:hover {
+	text-decoration:none;
 }
 .account-menu ul {
 	list-style-type:none;
@@ -63,11 +64,15 @@ table {
 .nav-main-menu .active-highlight {
 	border-left:3px solid #ffffff;
 }
-.search-pos {
+.header-sub {
 	margin-top:-24px;
 	padding:10px;
 	background-color:#d1ecf1;
 	border-bottom:1px solid #bdc3c7;
+}
+.container-search {
+	display:none;
+	background-color:#fffff5;
 }
 
 /* msg prompt */
@@ -76,7 +81,7 @@ table {
 }
 
 /* fa close */
-.fa-close {
+.fa-window-close {
 	cursor:pointer;
 }
 /* Page Loading */
@@ -190,6 +195,9 @@ table {
 .item-edit {
 	color:blue;
 }
+.m-txt {
+	font-weight:700;
+}
 .modal-txt {
 	font-size:13px;
 	padding-top:8px;
@@ -205,3 +213,36 @@ span#totalItems {
 	font-size:14px;
 }
 
+.back-to-top
+{
+   cursor:pointer;
+   background-color:#0c5460;
+   color:#ffffff;
+   position:fixed;
+   right:0;
+   bottom:0;
+   z-index:99;
+   display:none;
+   padding-top:12px;
+   padding-bottom:12px;
+   padding-left:14px;
+   padding-right:14px;
+}
+
+/* bootstrap */
+.modal-dialog,
+.modal-content {
+    /* 80% of window height */
+    height: 85%;
+}
+
+.modal-body {
+    /* 100% = dialog height, 120px = header + footer */
+    max-height: calc(100% - 120px);
+    max-height: -moz-calc(100% - 120px);
+    max-height: -webkit-calc(100% - 120px);
+    overflow-y: scroll;
+    -webkit-overflow-y:scroll;
+    -moz-overflow-y:scroll;
+    -o-overflow-y:scroll;
+}

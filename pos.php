@@ -15,44 +15,68 @@ $accountData = AccountsAdminInfoController::Create();
 $level = $accountData->getData('level');
 
 //active navigation
-$active = '1';
+$active = '2';
 
 //init header with one parameter
 Header::Create($active);
 
-?> 
-    
-    <div class="search-pos mb-2">
+?>
+
+    <div class="header-sub mb-2">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-6">
                     <div class="pos-sub-item">
-                        <ul> 
-                            <?php if($level == 1 || $level == 2) : ?>                         
+                        <ul>
+                            <?php if($level == 1 || $level == 2) : ?>
                                 <li><a href="pos#add" class="active-sub-item"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
                             <?php endif; ?>
-                            <?php if($level == 3) : ?> 
+                            <?php if($level == 3) : ?>
                                 <li><a href="pos#" class="active-sub-item"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
-                            <?php endif; ?>   
-                                <li><a href="inventory#view" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>                            
+                            <?php endif; ?>
+                                <li><a href="inventory#view" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-8 col-md-6">
                     <!--<form class="form-inline">-->
                     <div class="col-auto">
-                      <label class="sr-only" for="inlineFormInputGroup">Search Item (Inventory)</label>
-                      <div class="input-group">                         
-                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search Items (Inventory)">
+                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
                       </div>
                     </div>
-                      <!--<span class="m-search-pos-logo"><i class="fa fa-search"></i></span>-->
-                      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-                    <!--</form>-->
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-search pt-5 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!--<form class="form-inline">-->
+                    <div class="col-auto">
+                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="m-searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container panel-x container-search mb-2">
+        <div class="row">
+            <div class="col-12">
+                <div id="searchResult"></div>
             </div>
         </div>
     </div>
@@ -77,14 +101,16 @@ Header::Create($active);
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Type:</label>
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Material Type:</label>
                             <div class="col-sm-8">
                               <select name="material_type" id="material_type" class="form-control form-control-sm">
-                                <option value="aaa">AAA</option>
-                                <option value="bbb">BBB</option>
-                                <option value="ccc">CCC</option>
-                                <option value="ddd">DDD</option>
-                                <option value="eee">EEE</option>
+                                <option value="Major Items">Major Items</option>
+                                <option value="Hardware">Hardware</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Tools">Tools</option>
+                                <option value="Paint">Paint</option>
+                                <option value="Screw, Bolts & Nuts, Washers">Screw, Bolts & Nuts, Washers</option>
                               </select>
                             </div>
                         </div>
@@ -119,9 +145,10 @@ Header::Create($active);
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">&nbsp;</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-8 smooth-scroll">
                               <button type="submit" id="submit-save" class="btn btn-info float-right"><i class="fa fa-cart-arrow-down"></i> Add Item</button>
+                              <a href="#scroll-view-log" id="btn-view-log" class="btn alert-success float-right mr-2"><i class="fa fa-check"></i> Saved!</a>
                             </div>
                         </div>
                     </form>
@@ -129,8 +156,8 @@ Header::Create($active);
                 <div class="item-info col-12 col-lg-6">
                     <p class="alert alert-info"><i class="fa fa-info-circle"></i> Item information goes here!</p>
                 </div>
-                <div class="p-item-success col-12 col-lg-6">                  
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Item has been added!</p>
+                <div class="p-item-success col-12 col-lg-6">
+                    <p class="alert alert-success" id="scroll-view-log"><i class="fa fa-check"></i> Item has been added!</p>
                     <div class="row no-gutters">
                         <div class="col-6">
                             <p class="p-s-1 text-right">Item code:</p>
@@ -149,7 +176,7 @@ Header::Create($active);
                     </div>
                     <div class="row no-gutters">
                         <div class="col-6">
-                            <p class="p-s-1 text-right">Type:</p>
+                            <p class="p-s-1 text-right">Material Type:</p>
                         </div>
                         <div class="col-6">
                             <p id="p-material-type" class="p-s-2 text-left"></p>
@@ -205,6 +232,22 @@ Header::Create($active);
                     </div>
                     <div class="row no-gutters">
                         <div class="col-6">
+                            <p class="p-s-1 text-right">Total Sales:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-total-sales" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            <p class="p-s-1 text-right">Balance Sales:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-balance-sales" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
                             <p class="p-s-1 text-right">Profit:</p>
                         </div>
                         <div class="col-6">
@@ -218,12 +261,12 @@ Header::Create($active);
                         <div class="col-6">
                             <p id="p-overall-profit" class="p-s-2 text-left"></p>
                         </div>
-                    </div>                
+                    </div>
                 </div>
             </div>
-        <?php endif; ?> 
-        
-        <?php if($level == 3) : ?>   
+        <?php endif; ?>
+
+        <?php if($level == 3) : ?>
             <p>POS FOR LEVEL 3</p>
         <?php endif; ?>
     </div>
@@ -235,9 +278,10 @@ Footer::Create();
 ?>
 
     <script type="text/javascript">
-        $(document).ready(function() 
+        $(document).ready(function()
         {
             $('.p-item-success').hide();
+            $('#btn-view-log').hide();
             inventoryAdd();
             inputFocus();
         });
@@ -249,10 +293,11 @@ Footer::Create();
         });
 
         function inputFocus() {
-            $("input").focus(function() {
+            $("input#item_code, input#description, input#purchased_stock, input#buying_price, input#trucking_fee, input#monthly_expenses, input#selling_price").focus(function() {
                 $('.item-info').show();
                 $('.p-item-success').hide();
-                $('#submit-save').removeAttr('disabled');          
+                $('#btn-view-log').hide();
+                $('#submit-save').removeAttr('disabled');
             });
         }
 
@@ -270,9 +315,9 @@ Footer::Create();
                 return function (str) {
                     return (str+'').toLowerCase();
                 }
-            })();        
+            })();
 
-            $('#inventoryAdd').submit(function(e) {  
+            $('#inventoryAdd').submit(function(e) {
 
                 var item_code = $('#item_code').val(),
                     description = $('#description').val(),
@@ -281,11 +326,11 @@ Footer::Create();
                     buying_price = $('#buying_price').val(),
                     trucking_fee = $('#trucking_fee').val(),
                     monthly_expenses = $('#monthly_expenses').val(),
-                    selling_price = $('#selling_price').val(); 
+                    selling_price = $('#selling_price').val();
 
                 //preventing a page refresh
                 e.preventDefault();
-                
+
                 //disable submit button
                 $('#submit-save').attr('disabled', 'disabled');
 
@@ -295,12 +340,14 @@ Footer::Create();
 
                 //adding inventory item using ajax
                 $.ajax({
-                    url: "server-ajax/inventoryajax", 
+                    url: "server-ajax/inventoryajax",
                     type: "POST",
-                    data: $('#item_code, #description, #material_type, #purchased_stock, #buying_price, #trucking_fee, #monthly_expenses, #selling_price').serialize(), 
+                    data: $('#item_code, #description, #material_type, #purchased_stock, #buying_price, #trucking_fee, #monthly_expenses, #selling_price').serialize(),
                     success: function() {
                         //show item log
                         $('.p-item-success').fadeIn();
+                        //show btn saved
+                        $('#btn-view-log').fadeIn();
                         //hide item-info
                         $('.item-info').hide();
                         //hide please wait
@@ -310,7 +357,7 @@ Footer::Create();
                         //show item details
                         $('#p-item-code').text(item_code);
                         $('#p-description').text(__ucwords(__strtolower(description)));
-                        $('#p-material-type').text(material_type);
+                        $('#p-material-type').text(__ucwords(__strtolower(material_type)));
                         $('#p-purchased-stock').text(purchased_stock);
                         $('#p-available-stock').text(purchased_stock);
                         $('#p-buying-price').text('₱' + buying_price);
@@ -318,8 +365,15 @@ Footer::Create();
                         $('#p-monthly-expenses').text('₱' + monthly_expenses);
                         $('#p-selling-price').text('₱' + selling_price);
 
+                        //compute total sales
+                        var total_sales = purchased_stock * selling_price;
+
                         var computeProfit = (selling_price - buying_price - trucking_fee - monthly_expenses);
                         var computeOverallProfit = (computeProfit * purchased_stock);
+
+                        //show total and balance sales
+                        $('#p-total-sales').text('₱' + Number(total_sales).toFixed(1));
+                        $('#p-balance-sales').text('₱' + Number(total_sales).toFixed(1));
 
                         //show total capital and profit
                         $('#p-profit').text('₱' + Number(computeProfit).toFixed(1));
@@ -327,26 +381,57 @@ Footer::Create();
 
                         //clear inputs
                         $("input").val('');
-                        
-                        console.log("AJAX request was successfull - action=INSERT");  
+
+                        console.log("AJAX request was successfull - action=INSERT");
                     },
-                    complete: function(data) {      
+                    complete: function(data) {
                         console.log("AJAX request was completed - action=INSERT");
                     },
                     error:function(){
                         console.log("AJAX request was a failure - action=INSERT");
-                    } 
-                });           
-            });         
+                    }
+                });
+            });
         }
     </script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            function loadSearchData(query)
+            {
+                var level = <?php echo $level; ?>
 
-<?php 
-        else: 
+                $.ajax({
+                    url:"server-ajax/inventorysearchajax",
+                    method:"post",
+                    data:{query:query, level:level},
+                    success:function(data)
+                    {
+                        $('#searchResult').html(data);
+                    }
+                });
+            }
+
+            $('#searchText, #m-searchText').keyup(function() {
+                var search = $(this).val();
+                if(search != '')
+                {
+                    loadSearchData(search);
+                    $('.container-search').show();
+                }
+                else
+                {
+                    $('.container-search').hide();
+                }
+            });
+        });
+    </script>
+
+<?php
+        else:
             require_once 'login-form.php';
-        endif; 
-?> 
+        endif;
+?>
 
 </body>
 </html>
-    

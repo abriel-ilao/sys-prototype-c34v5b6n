@@ -66,6 +66,7 @@ require_once 'app/data/inventory/InventoryEditInfo.php';
 require_once 'app/data/inventory/InventoryDel.php';
 require_once 'app/data/inventory/InventoryPaginate.php';
 require_once 'app/data/inventory/InventoryItemNotification.php';
+require_once 'app/data/inventory/InventorySearch.php';
 
 
 

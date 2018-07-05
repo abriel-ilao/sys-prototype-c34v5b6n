@@ -23,27 +23,51 @@ Header::Create($active);
 
 ?> 
 
-    <div class="search-pos mb-2">
+    <div class="header-sub mb-2">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6">
                     <h1 class="h6 mt-2"><i class="fa fa-tag"></i> Item Notification</h1>
                 </div>
-                <div class="col-12 col-md-6">
+                <div class="col-sm-8 col-md-6">
                     <!--<form class="form-inline">-->
                     <div class="col-auto">
-                      <label class="sr-only" for="inlineFormInputGroup">Search Item (Inventory)</label>
+                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
                       <div class="input-group">                         
-                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search Items (Inventory)">
+                        <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
                       </div>
                     </div>
-                      <!--<span class="m-search-pos-logo"><i class="fa fa-search"></i></span>-->
-                      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-                    <!--</form>-->
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-search pt-5 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!--<form class="form-inline">-->
+                    <div class="col-auto">
+                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
+                      <div class="input-group">                         
+                        <input type="text" class="form-control" id="m-searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container panel-x container-search mb-2">
+        <div class="row">
+            <div class="col-12">         
+                <div id="searchResult"></div> 
             </div>
         </div>
     </div>
@@ -75,11 +99,43 @@ Footer::Create();
                 },
                 complete: function() {
                   // Schedule the next request when the current one's complete
-                  setTimeout(worker, 3000);
+                  //setTimeout(worker, 3000);
                 }
             });
         })();  
     }
+</script>
+<script type="text/javascript">
+  $(document).ready(function()
+  {
+      function loadSearchData(query)
+      {
+          var level = <?php echo $level; ?>
+
+          $.ajax({
+              url:"server-ajax/inventorysearchajax",
+              method:"post",
+              data:{query:query, level:level},
+              success:function(data)
+              {
+                  $('#searchResult').html(data);
+              }
+          });
+      }
+      
+      $('#searchText, #m-searchText').keyup(function() {
+          var search = $(this).val();
+          if(search != '')
+          {
+              loadSearchData(search);
+              $('.container-search').show();
+          }
+          else
+          {
+              $('.container-search').hide();        
+          }
+      });  
+  });
 </script>
 
 <?php

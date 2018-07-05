@@ -16,7 +16,7 @@ $accountData = AccountsAdminInfoController::Create();
 $level = $accountData->getData('level');
 
 //active navigation
-$active = '1';
+$active = '2';
 
 //init inventory item's info
 $inventoryData = InventoryEditInfo::Create();
@@ -29,7 +29,7 @@ $itemId = $_GET['id'];
 
 ?> 
     
-    <div class="search-pos mb-2">
+    <div class="header-sub mb-2">
         <div class="container">
             <div class="row">
                 <div class="col-sm-8 col-md-6">
@@ -43,18 +43,42 @@ $itemId = $_GET['id'];
                 <div class="col-sm-8 col-md-6">
                     <!--<form class="form-inline">-->
                     <div class="col-auto">
-                      <label class="sr-only" for="inlineFormInputGroup">Search Item (Inventory)</label>
+                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
                       <div class="input-group">                         
-                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search Items (Inventory)">
+                        <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="fa fa-search"></i></div>
                         </div>
                       </div>
                     </div>
-                      <!--<span class="m-search-pos-logo"><i class="fa fa-search"></i></span>-->
-                      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-                    <!--</form>-->
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-search pt-5 pb-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!--<form class="form-inline">-->
+                    <div class="col-auto">
+                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
+                      <div class="input-group">                         
+                        <input type="text" class="form-control" id="m-searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text"><i class="fa fa-search"></i></div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container panel-x container-search mb-2">
+        <div class="row">
+            <div class="col-12">         
+                <div id="searchResult"></div> 
             </div>
         </div>
     </div>
@@ -78,6 +102,21 @@ $itemId = $_GET['id'];
                             <div class="col-sm-8">
                               <input type="text" name="description" id="description" value="<?= $inventoryData->readData('description', $itemId); ?>" class="form-control form-control-sm" autocomplete="off" placeholder="Description" required>
                             </div>
+                        </div>                       
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Material Type:</label>
+                            <div class="col-sm-8">
+                              <select name="material_type" id="material_type" class="form-control form-control-sm">
+                                <option value="<?= $inventoryData->readData('material_type', $itemId); ?>"><?= ucwords(strtolower($inventoryData->readData('material_type', $itemId))); ?> (Selected)</option>
+                                <option value="Major Items">Major Items</option>
+                                <option value="Hardware">Hardware</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Plumbing">Plumbing</option>
+                                <option value="Tools">Tools</option>
+                                <option value="Paint">Paint</option>
+                                <option value="Screw, Bolts & Nuts, Washers">Screw, Bolts & Nuts, Washers</option>
+                              </select>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Purchased stock:</label>
@@ -88,20 +127,26 @@ $itemId = $_GET['id'];
                         <div class="form-group row">
                             <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Available stock:</label>
                             <div class="col-sm-4">
-                              <input type="number" name="available_stock" id="available_stock" value="<?= $inventoryData->readData('available_stock', $itemId); ?>" class="form-control form-control-sm" placeholder="Purchased stock" required>
-                              <div class="inventory-purchased-available-stock">P < A</div>
+                              <input type="number" name="available_stock" id="available_stock" value="<?= $inventoryData->readData('available_stock', $itemId); ?>" class="form-control form-control-sm" placeholder="Available stock" required>
+                              <div class="inventory-purchased-available-stock">Purchased Stock < Available Stock</div>
                             </div>
                         </div>
-                        <!--<div class="form-group row">
-                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Available stock:</label>
-                            <div class="col-sm-8">
-                              <input type="email" class="form-control form-control-sm" id="colFormLabelSm" placeholder="Available stock">
-                            </div>
-                        </div>-->
                         <div class="form-group row">
                             <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Buying price:</label>
                             <div class="col-sm-4">
                               <input type="number" step="0.01" name="buying_price" id="buying_price" value="<?= $inventoryData->readData('buying_price', $itemId); ?>" class="form-control form-control-sm" placeholder="Buying price" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Trucking fee:</label>
+                            <div class="col-sm-4">
+                              <input type="number" step="0.01" name="trucking_fee" id="trucking_fee" value="<?= $inventoryData->readData('trucking_fee', $itemId); ?>" class="form-control form-control-sm" placeholder="Trucking fee" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Monthly expenses:</label>
+                            <div class="col-sm-4">
+                              <input type="number" step="0.01" name="monthly_expenses" id="monthly_expenses" value="<?= $inventoryData->readData('monthly_expenses', $itemId); ?>" class="form-control form-control-sm" placeholder="Monthly expenses" required>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -111,31 +156,19 @@ $itemId = $_GET['id'];
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">&nbsp;</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-4"></div>
+                            <div class="col-sm-8 smooth-scroll">   
                               <button type="submit" id="submit-save" class="btn btn-primary float-right"><i class="fa fa-edit"></i> Save Item</button>
+                              <a href="#scroll-view-log" id="btn-view-log" class="btn alert-success float-right mr-2"><i class="fa fa-check"></i> Saved!</a>
                             </div>
                         </div>
-
-                      <!--<div class="form-group row">
-                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Total Capital:</label>
-                        <div class="col-sm-8 col-sm-8 col-md-4">
-                          <span style="font-size:13px;">P123</span>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Total profit:</label>
-                        <div class="col-sm-8 col-sm-8 col-md-4">
-                          <span style="font-size:13px;">P234</span>
-                        </div>
-                      </div>-->
                     </form>
                 </div>
                 <div class="item-info col-12 col-lg-6">
                     <p class="alert alert-info"><i class="fa fa-info-circle"></i> Item information goes here!</p>
                 </div>
                 <div class="p-item-success col-12 col-lg-6">                  
-                    <p class="alert alert-success"><i class="fa fa-check"></i> Item has been updated!</p>
+                    <p class="alert alert-success" id="scroll-view-log"><i class="fa fa-check"></i> Item has been saved!</p>
                     <div class="row no-gutters">
                         <div class="col-6">
                             <p class="p-s-1 text-right">Item code:</p>
@@ -150,6 +183,14 @@ $itemId = $_GET['id'];
                         </div>
                         <div class="col-6">
                             <p id="p-description" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            <p class="p-s-1 text-right">Material Type:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-material-type" class="p-s-2 text-left"></p>
                         </div>
                     </div>
                     <div class="row no-gutters">
@@ -178,6 +219,22 @@ $itemId = $_GET['id'];
                     </div>
                     <div class="row no-gutters">
                         <div class="col-6">
+                            <p class="p-s-1 text-right">Trucking fee:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-trucking-fee" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            <p class="p-s-1 text-right">Monthly expenses:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-monthly-expenses" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
                             <p class="p-s-1 text-right">Selling price:</p>
                         </div>
                         <div class="col-6">
@@ -186,10 +243,26 @@ $itemId = $_GET['id'];
                     </div>
                     <div class="row no-gutters">
                         <div class="col-6">
-                            <p class="p-s-1 text-right">Total capital:</p>
+                            <p class="p-s-1 text-right">Total Sales:</p>
                         </div>
                         <div class="col-6">
-                            <p id="p-total-capital" class="p-s-2 text-left"></p>
+                            <p id="p-total-sales" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            <p class="p-s-1 text-right">Balance Sales:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-balance-sales" class="p-s-2 text-left"></p>
+                        </div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-6">
+                            <p class="p-s-1 text-right">Profit:</p>
+                        </div>
+                        <div class="col-6">
+                            <p id="p-profit" class="p-s-2 text-left"></p>
                         </div>
                     </div>
                     <div class="row no-gutters">
@@ -197,9 +270,9 @@ $itemId = $_GET['id'];
                             <p class="p-s-1 text-right">Total profit:</p>
                         </div>
                         <div class="col-6">
-                            <p id="p-total-profit" class="p-s-2 text-left"></p>
+                            <p id="p-overall-profit" class="p-s-2 text-left"></p>
                         </div>
-                    </div>
+                    </div>                
                 </div>
             </div>
         <?php endif; ?> 
@@ -219,6 +292,7 @@ Footer::Create();
         $(document).ready(function() 
         {
             $('.p-item-success').hide();
+            $('#btn-view-log').hide();
             inventoryEdit();
             inputFocus();
         });
@@ -230,9 +304,10 @@ Footer::Create();
         });
 
         function inputFocus() {
-            $("input").focus(function() {
+            $("input#item_code, input#description, input#purchased_stock, input#available_stock, input#buying_price, input#trucking_fee, input#monthly_expenses, input#selling_price").focus(function() {
                 $('.item-info').show();
                 $('.p-item-success').hide();
+                $('#btn-view-log').hide();
                 //$('#submit-save').removeAttr('disabled');          
             });
         }
@@ -260,18 +335,20 @@ Footer::Create();
 
             var item_code = $('#item_code').val(),
                 description = $('#description').val(),
+                material_type = $('#material_type').val(),
                 purchased_stock = $('#purchased_stock').val(),
                 available_stock = $('#available_stock').val(),
                 buying_price = $('#buying_price').val(),
+                trucking_fee = $('#trucking_fee').val(),
+                monthly_expenses = $('#monthly_expenses').val(),
                 selling_price = $('#selling_price').val();
 
                 if(Number(purchased_stock) < Number(available_stock)) 
                 {    
                     $('.inventory-purchased-available-stock').fadeIn();
                     setTimeout(function() {
-                        //display error log
                         $('.inventory-purchased-available-stock').fadeOut();
-                    }, 4000);      
+                    }, 5000);      
                 } else {
 
                     //display error log
@@ -285,10 +362,12 @@ Footer::Create();
                     $.ajax({
                         url: "server-ajax/inventoryeditajax", 
                         type: "POST",
-                        data: $('#item_id, #item_code, #description, #purchased_stock, #available_stock, #buying_price, #selling_price').serialize(), 
+                        data: $('#item_id, #item_code, #description, #material_type, #purchased_stock, #available_stock, #buying_price, #trucking_fee, #monthly_expenses, #selling_price').serialize(), 
                         success: function() {
                             //show item log
                             $('.p-item-success').fadeIn();
+                            //show btn saved
+                            $('#btn-view-log').fadeIn();
                             
                             //hide item-info
                             $('.item-info').hide();
@@ -300,27 +379,30 @@ Footer::Create();
                             //show item details
                             $('#p-item-code').text(item_code);
                             $('#p-description').text(__ucwords(__strtolower(description)));
+                            $('#p-material-type').text(__ucwords(__strtolower(material_type)));
                             $('#p-purchased-stock').text(purchased_stock);
                             $('#p-available-stock').text(available_stock);
                             $('#p-buying-price').text('₱' + buying_price);
+                            $('#p-trucking-fee').text('₱' + trucking_fee);
+                            $('#p-monthly-expenses').text('₱' + monthly_expenses);
                             $('#p-selling-price').text('₱' + selling_price);
 
-                            //total capital = (buying price * quantity)
-                            var t_capital = (buying_price * purchased_stock);
+                            //compute total sales
+                            var total_sales = purchased_stock * selling_price;
+                            //compute balance sales
+                            var balance_sales = available_stock * selling_price;
 
-                            //total profit = (selling price * quantity)
-                            var t_profit = (selling_price * purchased_stock);
+                            var computeProfit = (selling_price - buying_price - trucking_fee - monthly_expenses);
+                            var computeOverallProfit = (computeProfit * purchased_stock);
+
+                            //show total and balance sales
+                            $('#p-total-sales').text('₱' + Number(total_sales).toFixed(1));
+                            $('#p-balance-sales').text('₱' + Number(balance_sales).toFixed(1));
 
                             //show total capital and profit
-                            $('#p-total-capital').text('₱' + Number(t_capital).toFixed(1));
-                            $('#p-total-profit').text('₱' + Number(t_profit).toFixed(1));
-
-                            /*if(purchased_stock <= 20) {
-                                $('#availableStockNum').text(purchased_stock).css({'color' : 'red'});
-                            } else {
-                                $('#availableStockNum').text(purchased_stock).css({'color' : '#0c5460'});
-                            }*/
-                            
+                            $('#p-profit').text('₱' + Number(computeProfit).toFixed(1));
+                            $('#p-overall-profit').text('₱' + Number(computeOverallProfit).toFixed(1));
+                           
                             console.log("AJAX request was successfull - action=UPDATE");  
                         },
                         complete: function(data) {      
@@ -333,6 +415,38 @@ Footer::Create();
                 }           
             });         
         }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            function loadSearchData(query)
+            {
+                var level = <?php echo $level; ?>
+
+                $.ajax({
+                    url:"server-ajax/inventorysearchajax",
+                    method:"post",
+                    data:{query:query, level:level},
+                    success:function(data)
+                    {
+                        $('#searchResult').html(data);
+                    }
+                });
+            }
+            
+            $('#searchText, #m-searchText').keyup(function() {
+                var search = $(this).val();
+                if(search != '')
+                {
+                    loadSearchData(search);
+                    $('.container-search').show();
+                }
+                else
+                {
+                    $('.container-search').hide();        
+                }
+            });  
+        });
     </script>
 
 <?php 

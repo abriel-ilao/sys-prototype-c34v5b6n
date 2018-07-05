@@ -61,6 +61,10 @@ Flight::route('/server-ajax/inventoryitemnotificationcounterajax', function(){
     include './server-ajax/inventoryitemnotificationcounterajax.php';
 });
 
+Flight::route('/server-ajax/inventorysearchajax', function(){
+    include './server-ajax/inventorysearchajax.php';
+});
+
 /*Flight::route('/??/@id:[0-9]{2}', function($id){
     include '??.php';
 });

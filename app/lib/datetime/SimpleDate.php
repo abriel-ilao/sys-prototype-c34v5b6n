@@ -1,11 +1,11 @@
-<?php 
+<?php
 
-namespace app\lib\datetime 
+namespace app\lib\datetime
 {
 
 	use \DateTime;
 
-	class SimpleDate 
+	class SimpleDate
 	{
 
 		private $_timezone = 'Asia/Manila';

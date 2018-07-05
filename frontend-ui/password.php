@@ -3,6 +3,7 @@ class Password {
     public static function Create() { return new Password; }   
     public function __clone() {}
     public function __construct() { 
+   // echo md5('0000027361728374');  
 ?>
 
 <!doctype html>

@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 require_once './auth.php';
 
-use app\data\inventory\InventoryItemNotification;	
+use app\data\inventory\InventoryItemNotification;
 
 if($auth) :
 
@@ -11,7 +11,7 @@ $rows = $inventory->readData();
 
 $counter = 0;
 
-foreach ($rows as $row) 
+foreach ($rows as $row)
 {
 	$id = $row['Id'];
 
@@ -19,7 +19,7 @@ foreach ($rows as $row)
 
 	if($available_stock <= 20) {
 		$counter++;
-	} 
+	}
 }
 
 if($counter == 0) {
@@ -41,15 +41,11 @@ echo 0;
 	}
 </style>
 <?php
-echo $counter;	
+echo $counter;
 }
 
-else: 
+else:
     require_once 'login-form.php';
-endif; 
+endif;
 
-?> 
-
-
-
-
+?>
