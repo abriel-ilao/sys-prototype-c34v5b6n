@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require 'flight/Flight.php';
 
@@ -65,6 +65,11 @@ Flight::route('/server-ajax/inventorysearchajax', function(){
     include './server-ajax/inventorysearchajax.php';
 });
 
+
+Flight::route('/server-ajax/transactionaddajax', function(){
+    include './server-ajax/transactionaddajax.php';
+});
+
 /*Flight::route('/??/@id:[0-9]{2}', function($id){
     include '??.php';
 });
@@ -74,7 +79,3 @@ Flight::route('/??/@id:[0-9]{1}', function($id){
 });*/
 
 Flight::start();
-
-
-
-

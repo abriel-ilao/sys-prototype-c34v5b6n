@@ -28,42 +28,57 @@ $sql = $paginate->dataQuery();
 $records_per_page = $paginate->recordsPerPage();
 $newquery = $paginate->paging($sql, $records_per_page);
 
+function subMenuItem($level, $elementPos) {
 ?>
+<div class="col-sm-8 col-md-6">
+		<div class="pos-sub-item <?= $elementPos; ?>">
+				<ul>
+						<?php if($level == 1 || $level == 2) : ?>
+								<li><a href="pos#add" class="show-please-wait"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
+						<?php endif; ?>
+						<?php if($level == 3) : ?>
+								<li><a href="pos" class="show-please-wait"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
+						<?php endif; ?>
+								<li><a href="inventory#view" class="active-sub-item"><i class="fa fa-tag"></i> View Items</a></li>
+				</ul>
+		</div>
+</div>
+<?php
+}
 
-	<div class="header-sub mb-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-md-6">
-                    <div class="pos-sub-item">
-                        <ul>
-                            <?php if($level == 1 || $level == 2) : ?>
-                                <li><a href="pos#add" class="show-please-wait"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
-                            <?php endif; ?>
-                            <?php if($level == 3) : ?>
-                                <li><a href="pos" class="show-please-wait"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
-                            <?php endif; ?>
-                                <li><a href="inventory#view" class="active-sub-item"><i class="fa fa-tag"></i> View Items</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-6">
-                    <!--<form class="form-inline">-->
-                    <div class="col-auto">
-                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text"><i class="fa fa-search"></i></div>
-                        </div>
-                      </div>
-                    </div>
-                      <!--<span class="m-search-pos-logo"><i class="fa fa-search"></i></span>-->
-                      <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-                    <!--</form>-->
-                </div>
-            </div>
+function searchItems() {
+?>
+<div class="col-sm-8 col-md-6">
+    <!--<form class="form-inline">-->
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-search"></i></div>
         </div>
+      </div>
     </div>
+</div>
+<?php
+}
+?>
+		<div class="header-sub mb-2">
+				<div class="container">
+						<div class="row">
+							<?php
+								if($level == 1 || $level == 2):
+									subMenuItem($level, 'text-left');
+									searchItems();
+								endif;
+								if($level == 3):
+									searchItems();
+									subMenuItem($level, 'text-right');
+								endif;
+							?>
+						</div>
+				</div>
+		</div>
 
     <div class="m-search pt-5 pb-2">
         <div class="container">
@@ -112,7 +127,7 @@ $newquery = $paginate->paging($sql, $records_per_page);
 
 		<div class="row">
 			<div class="col-12">
-	        	<div class="table-responsive table-pad-bottom">
+	        <div class="table-responsive table-pad-bottom">
 					<table class="table table-bordered table-hover" style="font-size:13px;">
 						<thead>
 						<tr style="background-color:#d1ecf1;">

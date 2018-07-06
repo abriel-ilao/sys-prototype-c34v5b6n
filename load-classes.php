@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /*********************************************/
 /******************** app ********************/
@@ -37,7 +37,7 @@ require_once 'app/lib/encryption/Encryption.php';
 require_once 'app/lib/session/Session.php';
 
 //validation
-//factory 
+//factory
 require_once 'app/lib/validation/factory/Input.php';
 require_once 'app/lib/validation/factory/Matches.php';
 require_once 'app/lib/validation/factory/Max.php';
@@ -68,8 +68,5 @@ require_once 'app/data/inventory/InventoryPaginate.php';
 require_once 'app/data/inventory/InventoryItemNotification.php';
 require_once 'app/data/inventory/InventorySearch.php';
 
-
-
-
-
-
+/******************** Cart ********************/
+require_once 'app/data/transaction/TransactionAddItem.php';

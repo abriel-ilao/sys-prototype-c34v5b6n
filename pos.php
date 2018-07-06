@@ -20,36 +20,54 @@ $active = '2';
 //init header with one parameter
 Header::Create($active);
 
+function subMenuItem($level, $elementPos) {
 ?>
+<div class="col-sm-8 col-md-6">
+    <div class="pos-sub-item <?= $elementPos; ?>">
+        <ul>
+            <?php if($level == 1 || $level == 2) : ?>
+                <li><a href="pos#add" class="active-sub-item"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
+            <?php endif; ?>
+            <?php if($level == 3) : ?>
+                <li><a href="pos#" class="active-sub-item"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
+            <?php endif; ?>
+                <li><a href="inventory#view" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>
+        </ul>
+    </div>
+</div>
+<?php
+}
 
+function searchItems() {
+?>
+<div class="col-sm-8 col-md-6">
+    <!--<form class="form-inline">-->
+    <div class="col-auto">
+      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-search"></i></div>
+        </div>
+      </div>
+    </div>
+</div>
+<?php
+}
+?>
     <div class="header-sub mb-2">
         <div class="container">
             <div class="row">
-                <div class="col-sm-8 col-md-6">
-                    <div class="pos-sub-item">
-                        <ul>
-                            <?php if($level == 1 || $level == 2) : ?>
-                                <li><a href="pos#add" class="active-sub-item"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
-                            <?php endif; ?>
-                            <?php if($level == 3) : ?>
-                                <li><a href="pos#" class="active-sub-item"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
-                            <?php endif; ?>
-                                <li><a href="inventory#view" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-6">
-                    <!--<form class="form-inline">-->
-                    <div class="col-auto">
-                      <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
-                      <div class="input-group">
-                        <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text"><i class="fa fa-search"></i></div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
+              <?php
+                if($level == 1 || $level == 2):
+                  subMenuItem($level, 'text-left');
+                  searchItems();
+                endif;
+                if($level == 3):
+                  searchItems();
+                  subMenuItem($level, 'text-right');
+                endif;
+              ?>
             </div>
         </div>
     </div>
@@ -267,7 +285,16 @@ Header::Create($active);
         <?php endif; ?>
 
         <?php if($level == 3) : ?>
-            <p>POS FOR LEVEL 3</p>
+          <div class="row">
+              <div class="col-12">
+                  <div class="h6-responsive h-inventory" id="add"><i class="fa fa-shopping-cart"></i> Product Transaction</div>
+                  <h4 class="h4-responsive mt-5 mb-5" style="color:silver;">Product item goes here...</h4>
+              </div>
+              <div class="col-12">
+                <div class="transaction-add-item">
+                </div>
+              </div>
+          </div>
         <?php endif; ?>
     </div>
 
@@ -302,20 +329,6 @@ Footer::Create();
         }
 
         function inventoryAdd() {
-
-            var __ucwords = (function (str) {
-                return function (str) {
-                    return (str + '').replace(/^([a-z])|\s+([a-z])/g, function ($1) {
-                        return $1.toUpperCase();
-                    });
-                }
-            })();
-
-            var __strtolower = (function (str) {
-                return function (str) {
-                    return (str+'').toLowerCase();
-                }
-            })();
 
             $('#inventoryAdd').submit(function(e) {
 

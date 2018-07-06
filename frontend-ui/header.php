@@ -25,7 +25,7 @@ class Header {
     ($level == 3) ? $levelType = 'Cashier' : null;
 
     //logo
-    $logoName = 'JSJ Samar';
+    $logoName = '[logo]';
 
     //menu focus
     $main_menu = 'active active-highlight';
@@ -58,7 +58,6 @@ class Header {
         $m_item3 = '';
         $m_item4 = '';
     }
-
 ?>
 
 <!doctype html>

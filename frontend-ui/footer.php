@@ -15,8 +15,11 @@ class Footer {
 
     <!-- Optional JavaScript -->
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/popper.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="./js/numberWithCommas.js"></script>
+    <script type="text/javascript" src="./js/notify.min.js"></script>
+    <script type="text/javascript" src="./js/js.cookie.js"></script>
+    <script type="text/javascript" src="./js/mini.rand.lib.js"></script>
 
     <!-- init -->
     <script type="text/javascript">
@@ -42,6 +45,7 @@ class Footer {
         }
         hide_m_nav();
 
+        //sub menu caret
         function showInventorySub() {
             var caret = 0;
             $('ul.m-header-main-menu-list .m-header-main-menu-li:nth-child(2)').click(function() {
@@ -120,16 +124,10 @@ class Footer {
         }
         //removeAnimationIESafari();
 
-        function labelFocus() {
-            $('label').on('click', function() {
-                var label = $(this);
-                var input = label.siblings('input')[0];
-
-                label.addClass('active');
-                input.focus();
-            });
-        }
-       // labelFocus();
+        //init tooltip
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
 
         function faClose() {
             $('.fa-window-close').on('click', function() {
