@@ -1,22 +1,7 @@
-$(document).ready(function()
- {
-  var cart = new Cart();
-
-  _objElement.btnAdd.click(function()
-  {
-    var itemId = $(this).attr("data-id");
-    cart.addProduct(itemId);
-  });
-
-  _objElement.btnDel.click(function()
-  {
-    //cart.delProduct();
-  });
-});
-
 var _objElement = {
-  btnAdd : $('.btn-add-item'),
-  btnDel : $('#btn-del-143')
+ btnAdd : $('.btn-add-item'),
+ btnDel : $('.btn-del-item'),
+ btnCheckout : $('.btn-checkout')
 };
 
 function Cart()
@@ -40,7 +25,7 @@ function Cart()
     {
       const addCookie = (function() {
         //create a new cookie
-        objCookie.setCookie(objCookie.strSplit + __strtolower(itemId));
+        objCookie.setCookie(objCookie.strSplit + itemId);
         console.log('a new cookie has been added! ' + objCookie.getCookie());
       });
 
@@ -55,7 +40,7 @@ function Cart()
       var cookie = (function() {
         //find the existing item in a cookie array values
         for (var i = 1; i < splitCookie.length; i++) {
-          if(splitCookie[i] == __strtolower(itemId)) {
+          if(splitCookie[i] == itemId) {
             console.log(splitCookie[i] + ' exists!');
             return false;
           }
@@ -66,14 +51,14 @@ function Cart()
       //if item value doesn't match
       if(cookie) {
         //update cookie value
-        updatedCookie += objCookie.strSplit + __strtolower(itemId);
+        updatedCookie += objCookie.strSplit + itemId;
         Cookies.set('product-item', updatedCookie, { expires: 1 });
         console.log('updated cookie: ' + objCookie.getCookie());
       }
     }
   }
 
-  this.delProduct = function()
+  this.delProduct = function(itemId)
   {
     if(objCookie.getCookie() != null)
     {
@@ -93,7 +78,7 @@ function Cart()
         //store item value to cookie.cookieArr
         cookie.cookieArr.push(indexCookie[i]);
           //if split item value matches with selected item
-          if(indexCookie[i] == __strtolower(_objElement.id)) {
+          if(indexCookie[i] == itemId) {
             //delete specific array value if string matches
             cookie.cookieArr.splice(cookie.cookieArr.indexOf(indexCookie[i]), 1);
           }
@@ -117,12 +102,54 @@ function Cart()
             objCookie.removeCookie();
         }
 
+        //remove TR's element
+        $('#tr-id-' + itemId).remove();
+
         console.log('updated cookie: ' + objCookie.getCookie());
 
       });
 
       //init - delCookie
       return delCookie();
+    }
+  }
+
+  this.checkoutProduct = function()
+  {
+    if(objCookie.getCookie() != null)
+    {
+      //alert(objCookie.getCookie())
+      var checkout = (function() {
+        var cookie = {
+          cookieArr : [],
+          cookieCounter : '',
+          cookieNewValue : ''
+        }
+
+        //split a cookie array values
+        var indexCookie = objCookie.getCookie().split(objCookie.strSplit);
+
+        var qItemcounter = 0;
+        //find the existing item in a cookie array values
+        for (var i = 1; i < indexCookie.length; i++)
+        {
+
+          /* I stopped here */
+          //alert($('#q-item-'+indexCookie[i]).val());
+          alert('Check out!')
+
+          //console.log(indexCookie[i]);
+        //store item value to cookie.cookieArr
+        //cookie.cookieArr.push(indexCookie[i]);
+          //if split item value matches with selected item
+          //if(indexCookie[i] == itemId) {
+            //delete specific array value if string matches
+            //cookie.cookieArr.splice(cookie.cookieArr.indexOf(indexCookie[i]), 1);
+          //}
+        }
+      });
+
+      return checkout();
     }
   }
 }

@@ -5,11 +5,15 @@ require_once './frontend-ui/header.php';
 require_once './frontend-ui/footer.php';
 
 use app\controller\accounts\AccountsAdminInfoController;
+use app\data\transaction\TransactionAddItem;
 
 if($auth) :
 
 //init user's info controller
 $accountData = AccountsAdminInfoController::Create();
+
+//init transaction - adding an item
+$transacAddItem = TransactionAddItem::Create();
 
 //get user's level
 $level = $accountData->getData('level');
@@ -29,9 +33,9 @@ function subMenuItem($level, $elementPos) {
                 <li><a href="pos#add" class="active-sub-item"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
             <?php endif; ?>
             <?php if($level == 3) : ?>
-                <li><a href="pos#" class="active-sub-item"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
+                <li><a href="pos" class="active-sub-item"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
             <?php endif; ?>
-                <li><a href="inventory#view" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>
+                <li><a href="inventory" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>
         </ul>
     </div>
 </div>
@@ -285,13 +289,18 @@ function searchItems() {
         <?php endif; ?>
 
         <?php if($level == 3) : ?>
+        <?php
+          @$cookie = $_COOKIE["product-item"];
+        ?>
           <div class="row">
               <div class="col-12">
-                  <div class="h6-responsive h-inventory" id="add"><i class="fa fa-shopping-cart"></i> Product Transaction</div>
-                  <h4 class="h4-responsive mt-5 mb-5" style="color:silver;">Product item goes here...</h4>
-              </div>
-              <div class="col-12">
+                <div class="h6-responsive h-inventory" id="add"><i class="fa fa-shopping-cart"></i> Product Transaction</div>
+                <?php if($cookie == null) : ?>
+                <h4 class="h-class h4-responsive mt-5 mb-5" style="color:silver;">Product item goes here...</h4>
+                <?php endif; ?>
                 <div class="transaction-add-item">
+                <!-- /* I stopped here */ -->
+                <?php $transacAddItem->readData(); ?>
                 </div>
               </div>
           </div>
@@ -438,6 +447,24 @@ Footer::Create();
                 }
             });
         });
+    </script>
+    <script type="text/javascript" src="./js/mycart.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function()
+       {
+        var cart = new Cart();
+
+        _objElement.btnDel.click(function()
+        {
+          var itemId = $(this).attr("data-id");
+          cart.delProduct(itemId);
+        });
+
+        _objElement.btnCheckout.click(function() {
+          cart.checkoutProduct();
+        });
+
+      });
     </script>
 
 <?php

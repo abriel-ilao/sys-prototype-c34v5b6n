@@ -39,7 +39,7 @@ function subMenuItem($level, $elementPos) {
 						<?php if($level == 3) : ?>
 								<li><a href="pos" class="show-please-wait"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
 						<?php endif; ?>
-								<li><a href="inventory#view" class="active-sub-item"><i class="fa fa-tag"></i> View Items</a></li>
+								<li><a href="inventory" class="active-sub-item"><i class="fa fa-tag"></i> View Items</a></li>
 				</ul>
 		</div>
 </div>
@@ -175,8 +175,8 @@ function searchItems() {
 			</div>
 		</div>
 
-        <div class="row">
-        	<div class="col-12">
+      <div class="row">
+        <div class="col-12">
 				<nav aria-label="...">
 						<ul class="pagination pagination-sm">
 						<?php

@@ -25,7 +25,7 @@ class Header {
     ($level == 3) ? $levelType = 'Cashier' : null;
 
     //logo
-    $logoName = '[logo]';
+    $logoName = 'Logo';
 
     //menu focus
     $main_menu = 'active active-highlight';
@@ -214,7 +214,7 @@ class Header {
                     <div class="m-header-account-circle m-header-account-circle-bg-<?= rand(1, 10); ?>"><?= substr($fname, 0, 1); ?></div>
                     <ul class="m-header-account-info">
                         <li><strong><?=$fname.' '.$sname.' </strong> ('.$levelType.')';?></li>
-                        <li>abriel.ilao@gmail.com</li>
+                        <li><?=$email;?></li>
                         <li><a href="changepass">Change Password</a> &nbsp; <span style="color:#636e72;">|</span> &nbsp; <a href="logout.php">Log out</a></li>
                     </ul>
                 </div>
@@ -239,14 +239,20 @@ class Header {
                         <?php if($level == 1 || $level == 2) : ?>
                         <li class="m-header-main-menu-li">
                             <i class="fa fa-shopping-bag text-primary"></i><span style="padding-left:20px;">INVENTORY &nbsp;<i class="fa fa-caret-right fa-inventory-toggle"></i></span>
-                            <ul class="m-header-main-menu-list-sub">
+                            <ul class="m-header-main-menu-list-sub m-header-main-menu-list-sub-inventory">
                                 <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-cart-arrow-down text-info" style="font-size:12px;"></i>&nbsp; Add Item</span></li>
                                 <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-tag text-secondary" style="font-size:12px;"></i>&nbsp; View Items</span></li>
                             </ul>
                         </li>
                         <?php endif; ?>
                         <?php if($level == 3) : ?>
-                        <li class="m-header-main-menu-li"><i class="fa fa-shopping-bag"></i><span style="padding-left:20px;">POINT OF SALE</span></li>
+                        <li class="m-header-main-menu-li">
+                            <i class="fa fa-shopping-bag text-primary"></i><span style="padding-left:20px;">POINT OF SALE &nbsp;<i class="fa fa-caret-right fa-inventory-toggle"></i></span>
+                            <ul class="m-header-main-menu-list-sub m-header-main-menu-list-sub-point-of-sale">
+                                <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-cart-arrow-down text-info" style="font-size:12px;"></i>&nbsp; Product Transaction</span></li>
+                                <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-tag text-secondary" style="font-size:12px;"></i>&nbsp; View Items</span></li>
+                            </ul>
+                        </li>
                         <?php endif; ?>
                         <li class="m-header-main-menu-li"><i class="fa fa-desktop text-danger"></i><span style="padding-left:19px;">ACTIVITY LOG</span></li>
                         <?php if($level == 1): ?>

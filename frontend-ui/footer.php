@@ -1,8 +1,17 @@
 <?php
+
+use app\controller\accounts\AccountsAdminInfoController;
+
 class Footer {
     public static function Create() { return new Footer; }
     public function __clone() {}
     public function __construct() {
+
+    //init user's info controller
+    $accountData = AccountsAdminInfoController::Create();
+
+    //get user's level
+    $level = $accountData->getData('level');
 ?>
 
     <div class="back-to-top-wrapper smooth-scroll">
@@ -20,6 +29,7 @@ class Footer {
     <script type="text/javascript" src="./js/notify.min.js"></script>
     <script type="text/javascript" src="./js/js.cookie.js"></script>
     <script type="text/javascript" src="./js/mini.rand.lib.js"></script>
+
 
     <!-- init -->
     <script type="text/javascript">
@@ -45,11 +55,15 @@ class Footer {
         }
         hide_m_nav();
 
+        //var level = <?php echo $level; ?>
+
         //sub menu caret
-        function showInventorySub() {
+        function showInventorySub(mainMenu, menuSub) {
             var caret = 0;
-            $('ul.m-header-main-menu-list .m-header-main-menu-li:nth-child(2)').click(function() {
-               $('.m-header-main-menu-list-sub').slideToggle();
+            $(mainMenu).click(function()
+            {
+               $(menuSub).slideToggle();
+
                if(!caret) {
                   $('.fa-inventory-toggle').removeClass('fa-caret-right').addClass('fa-caret-down');
                   caret = 1;
@@ -59,7 +73,8 @@ class Footer {
                }
             });
         }
-        showInventorySub();
+        showInventorySub('li.m-header-main-menu-li:nth-child(2)', 'ul.m-header-main-menu-list-sub-inventory');
+        showInventorySub('li.m-header-main-menu-li:nth-child(1)', 'ul.m-header-main-menu-list-sub-point-of-sale');
 
         //main menu link
         function main_menu_link() {
