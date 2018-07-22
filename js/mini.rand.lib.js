@@ -7,6 +7,7 @@ var __ucwords = (function (str) {
     }
 })();
 
+//
 var __strtolower = (function (str) {
     return function (str) {
         return (str+'').toLowerCase();
@@ -14,9 +15,11 @@ var __strtolower = (function (str) {
 })();
 
 //
-const numberWithCommas = (x) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+var __numberWithCommas = (function (str) {
+  return function(str) {
+    return str.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+})();
 
 //
 document.addEventListener ("keydown", function (zEvent) {

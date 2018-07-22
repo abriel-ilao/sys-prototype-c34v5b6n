@@ -34,7 +34,7 @@ function subMenuItem($level, $elementPos) {
 		<div class="pos-sub-item <?= $elementPos; ?>">
 				<ul>
 						<?php if($level == 1 || $level == 2) : ?>
-								<li><a href="pos#add" class="show-please-wait"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
+								<li><a href="pos" class="show-please-wait"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
 						<?php endif; ?>
 						<?php if($level == 3) : ?>
 								<li><a href="pos" class="show-please-wait"><i class="fa fa-shopping-bag"></i> Point of Sale</a></li>
@@ -112,7 +112,7 @@ function searchItems() {
         	<div class="col-12">
         	<div class="h6-responsive h-inventory" id="view"><i class="fa fa-tag"></i> Inventory Items</div>
 					<?php if($level == 1 || $level == 2) : ?>
-					<?= $paginate->totalItems(); ?>
+					<?= $paginate->totalItemsSummation(); ?>
             <div class="mb-3"><a href="#" data-toggle="modal" data-target="#compute_items" class="btn btn-info btn-sm">Summation of Inventory</a></div>
 					<?php endif; ?>
 				<nav aria-label="...">
@@ -127,7 +127,7 @@ function searchItems() {
 
 		<div class="row">
 			<div class="col-12">
-	        <div class="table-responsive table-pad-bottom">
+	        <div class="table-responsive table-pad-bottom mb-3">
 					<table class="table table-bordered table-hover" style="font-size:13px;">
 						<thead>
 						<tr style="background-color:#d1ecf1;">
@@ -221,7 +221,7 @@ Footer::Create();
 
 			                    $('#totalItems').text(y);
 
-							  	console.log("AJAX request was successfull - action=DELETE");
+							  	console.log("AJAX request was successful - action=DELETE");
 							},
 							error:function() {
 						  	console.log("AJAX request was a failure - action=DELETE");
@@ -264,10 +264,20 @@ Footer::Create();
 
 </script>
 <script type="text/javascript">
+		//put commas in an integer if n > 999
     for(var i = 1; i <= 4; i++) {
-        var comma_a = numberWithCommas($('.num-with-comma-' + i).text());
-        $('.num-with-comma-' + i).text(comma_a);
+        var n_commas = __numberWithCommas($('.num-with-commas-' + i).text());
+        $('.num-with-commas-' + i).text(n_commas);
     }
+
+		for(var i = 1; i <= 10; i++) {
+			for(var j = 1; j <= 10; j++) {
+	        var n_commas = __numberWithCommas($('.n'+i+'-commas-' + j).text());
+	        $('.n'+i+'-commas-' + j).text(n_commas);
+					$('.n-m1-'+i+'-commas-' + j).text(n_commas);
+					$('.n-m2-'+i+'-commas-' + j).text(n_commas);
+	    }
+		}
 </script>
 
 <?php

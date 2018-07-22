@@ -35,8 +35,8 @@ $itemId = $_GET['id'];
                 <div class="col-sm-8 col-md-6">
                     <div class="pos-sub-item">
                         <ul>
-                            <li><a href="pos#add" class="show-please-wait"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
-                            <li><a href="inventory#view" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>
+                            <li><a href="pos" class="show-please-wait"><i class="fa fa-cart-arrow-down"></i> Add Item</a></li>
+                            <li><a href="inventory" class="show-please-wait"><i class="fa fa-tag"></i> View Items</a></li>
                         </ul>
                     </div>
                 </div>
@@ -366,12 +366,12 @@ Footer::Create();
                             $('#p-item-code').text(item_code);
                             $('#p-description').text(__ucwords(__strtolower(description)));
                             $('#p-material-type').text(__ucwords(__strtolower(material_type)));
-                            $('#p-purchased-stock').text(purchased_stock);
-                            $('#p-available-stock').text(available_stock);
-                            $('#p-buying-price').text('₱' + buying_price);
-                            $('#p-trucking-fee').text('₱' + trucking_fee);
-                            $('#p-monthly-expenses').text('₱' + monthly_expenses);
-                            $('#p-selling-price').text('₱' + selling_price);
+                            $('#p-purchased-stock').text(__numberWithCommas(purchased_stock));
+                            $('#p-available-stock').text(__numberWithCommas(available_stock));
+                            $('#p-buying-price').text('₱' + __numberWithCommas(buying_price));
+                            $('#p-trucking-fee').text('₱' + __numberWithCommas(trucking_fee));
+                            $('#p-monthly-expenses').text('₱' + __numberWithCommas(monthly_expenses));
+                            $('#p-selling-price').text('₱' + __numberWithCommas(selling_price));
 
                             //compute total sales
                             var total_sales = purchased_stock * selling_price;
@@ -382,14 +382,14 @@ Footer::Create();
                             var computeOverallProfit = (computeProfit * purchased_stock);
 
                             //show total and balance sales
-                            $('#p-total-sales').text('₱' + Number(total_sales).toFixed(1));
-                            $('#p-balance-sales').text('₱' + Number(balance_sales).toFixed(1));
+                            $('#p-total-sales').text('₱' + __numberWithCommas(Number(total_sales).toFixed(1)));
+                            $('#p-balance-sales').text('₱' + __numberWithCommas(Number(balance_sales).toFixed(1)));
 
                             //show total capital and profit
-                            $('#p-profit').text('₱' + Number(computeProfit).toFixed(1));
-                            $('#p-overall-profit').text('₱' + Number(computeOverallProfit).toFixed(1));
+                            $('#p-profit').text('₱' + __numberWithCommas(Number(computeProfit).toFixed(1)));
+                            $('#p-overall-profit').text('₱' + __numberWithCommas(Number(computeOverallProfit).toFixed(1)));
 
-                            console.log("AJAX request was successfull - action=UPDATE");
+                            console.log("AJAX request was successful - action=UPDATE");
                         },
                         complete: function(data) {
                             console.log("AJAX request was completed - action=UPDATE");

@@ -142,7 +142,7 @@ class Header {
                     </a>
                 </li>
                 <li class="nav-item <?=@$item3;?>">
-                    <a class="nav-link show-please-wait" href="#"><i class="fa fa-desktop"></i> ACTIVITY LOG</a>
+                    <a class="nav-link show-please-wait" href="transactionlog"><i class="fa fa-desktop"></i> TRANSACTION LOG</a>
                 </li>
                 <?php if($level == 1) : ?>
                 <li class="nav-item <?=@$item4;?>">
@@ -159,8 +159,8 @@ class Header {
 
     <!-- Modal -->
     <div class="modal fade" id="modalAccountInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
+        <div class="modal-dialog modal-dialog-user-account" role="document">
+            <div class="modal-content modal-content-user-account">
                 <div class="modal-header">
                     <h6 class="modal-title" id="exampleModalLabel">Account Information</h6>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -234,29 +234,29 @@ class Header {
                 <div class="col-12">
                     <ul class="m-header-main-menu-list">
                         <?php if($level == 1 || $level == 2): ?>
-                        <li class="m-header-main-menu-li"><i class="fa fa-calculator text-info"></i><span style="padding-left:20px;">SALES REPORT</span></li>
+                        <li class="m-header-main-menu-li"><i class="fa fa-calculator text-info"></i><span style="padding-left:26px;">SALES REPORT</span></li>
                         <?php endif; ?>
                         <?php if($level == 1 || $level == 2) : ?>
-                        <li class="m-header-main-menu-li">
-                            <i class="fa fa-shopping-bag text-primary"></i><span style="padding-left:20px;">INVENTORY &nbsp;<i class="fa fa-caret-right fa-inventory-toggle"></i></span>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-inventory">
+                            <i class="fa fa-shopping-bag text-primary"></i><span style="padding-left:26px;">INVENTORY &nbsp;<i class="fa fa-caret-right fa-inventory-toggle"></i></span>
                             <ul class="m-header-main-menu-list-sub m-header-main-menu-list-sub-inventory">
-                                <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-cart-arrow-down text-info" style="font-size:12px;"></i>&nbsp; Add Item</span></li>
-                                <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-tag text-secondary" style="font-size:12px;"></i>&nbsp; View Items</span></li>
+                                <li class="m-header-main-menu-li-sub"><span style="padding-left:24px;"><i class="fa fa-cart-arrow-down text-info" style="font-size:12px;"></i>&nbsp; Add Item</span></li>
+                                <li class="m-header-main-menu-li-sub"><span style="padding-left:24px;"><i class="fa fa-tag text-secondary" style="font-size:12px;"></i>&nbsp; View Items</span></li>
                             </ul>
                         </li>
                         <?php endif; ?>
                         <?php if($level == 3) : ?>
-                        <li class="m-header-main-menu-li">
-                            <i class="fa fa-shopping-bag text-primary"></i><span style="padding-left:20px;">POINT OF SALE &nbsp;<i class="fa fa-caret-right fa-inventory-toggle"></i></span>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-point-of-sale">
+                            <i class="fa fa-shopping-bag text-primary"></i><span style="padding-left:26px;">POINT OF SALE &nbsp;<i class="fa fa-caret-right fa-inventory-toggle"></i></span>
                             <ul class="m-header-main-menu-list-sub m-header-main-menu-list-sub-point-of-sale">
                                 <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-cart-arrow-down text-info" style="font-size:12px;"></i>&nbsp; Product Transaction</span></li>
                                 <li class="m-header-main-menu-li-sub"><span style="padding-left:16px;"><i class="fa fa-tag text-secondary" style="font-size:12px;"></i>&nbsp; View Items</span></li>
                             </ul>
                         </li>
                         <?php endif; ?>
-                        <li class="m-header-main-menu-li"><i class="fa fa-desktop text-danger"></i><span style="padding-left:19px;">ACTIVITY LOG</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-transaction-log"><i class="fa fa-desktop text-danger"></i><span style="padding-left:21px;">TRANSACTION LOG</span></li>
                         <?php if($level == 1): ?>
-                        <li class="m-header-main-menu-li">&nbsp;<i class="fa fa-user text-warning"></i><span style="padding-left:19px;">ACCOUNTS</span></li>
+                        <li class="m-header-main-menu-li">&nbsp;<i class="fa fa-user text-warning"></i><span style="padding-left:21px;">ACCOUNTS</span></li>
                         <?php endif;?>
                     </ul>
                 </div>

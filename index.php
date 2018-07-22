@@ -36,6 +36,10 @@ Flight::route('/notify', function(){
     include 'inventoryitemnotification.php';
 });
 
+Flight::route('/transactionlog', function(){
+    include 'transactionlog.php';
+});
+
 /* server-ajax requests */
 Flight::route('/server-ajax/inventoryajax', function(){
     include './server-ajax/inventoryajax.php';
@@ -65,9 +69,20 @@ Flight::route('/server-ajax/inventorysearchajax', function(){
     include './server-ajax/inventorysearchajax.php';
 });
 
-
 Flight::route('/server-ajax/transactionaddajax', function(){
     include './server-ajax/transactionaddajax.php';
+});
+
+Flight::route('/server-ajax/transactajax', function(){
+    include './server-ajax/transactajax.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax', function(){
+    include './server-ajax/transactionlogajax.php';
+});
+
+Flight::route('/server-ajax/transactionlogyearajax', function(){
+    include './server-ajax/transactionlogyearajax.php';
 });
 
 /*Flight::route('/??/@id:[0-9]{2}', function($id){

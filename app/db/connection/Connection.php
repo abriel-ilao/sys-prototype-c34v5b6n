@@ -21,10 +21,10 @@ namespace app\db\connection {
         **** @$_DB - Mysql database name
         ********************************************************************
         */
-        private static $_IP = '198.91.81.6',
-                       $_ROOT = 'invent27_elem11',
-                       $_PASSWORD = '6bc225a17e3e79902ed9b314da57ca86',
-                       $_DB = 'invent27_dbsyshardware';  
+        private static $_IP = 'localhost',
+                       $_ROOT = 'root',
+                       $_PASSWORD = '',
+                       $_DB = 'db_sys_hardware';  
                        
         /*******************************************************************/
                        

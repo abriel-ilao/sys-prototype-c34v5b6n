@@ -30,10 +30,8 @@ class Footer {
     <script type="text/javascript" src="./js/js.cookie.js"></script>
     <script type="text/javascript" src="./js/mini.rand.lib.js"></script>
 
-
     <!-- init -->
     <script type="text/javascript">
-
     $(document).ready(function() {
         /*** Header-m - Navicon toggle ***/
         function navicon() {
@@ -55,8 +53,6 @@ class Footer {
         }
         hide_m_nav();
 
-        //var level = <?php echo $level; ?>
-
         //sub menu caret
         function showInventorySub(mainMenu, menuSub) {
             var caret = 0;
@@ -73,8 +69,8 @@ class Footer {
                }
             });
         }
-        showInventorySub('li.m-header-main-menu-li:nth-child(2)', 'ul.m-header-main-menu-list-sub-inventory');
-        showInventorySub('li.m-header-main-menu-li:nth-child(1)', 'ul.m-header-main-menu-list-sub-point-of-sale');
+        showInventorySub('li.m-header-main-menu-li-inventory', 'ul.m-header-main-menu-list-sub-inventory');
+        showInventorySub('li.m-header-main-menu-li-point-of-sale', 'ul.m-header-main-menu-list-sub-point-of-sale');
 
         //main menu link
         function main_menu_link() {
@@ -84,8 +80,8 @@ class Footer {
             $('ul.m-header-main-menu-list .m-header-main-menu-li:nth-child(3)').click(function() {
                 window.location.replace('#');
             });
-            $('ul.m-header-main-menu-list .m-header-main-menu-li:nth-child(4)').click(function() {
-                window.location.replace('#');
+            $('ul.m-header-main-menu-list .m-header-main-menu-li-transaction-log').click(function() {
+                window.location.replace('transactionlog');
             });
             //sub
             $('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(1)').click(function() {
@@ -163,30 +159,31 @@ class Footer {
 
         $('.wrapper-please-wait').hide();
         //pleaseWait();
-
     });
 
-        function itemNotificationCounter() {
-            return (function worker() {
-                $.ajax({
-                    url: 'server-ajax/inventoryitemnotificationcounterajax',
-                    success: function(data) {
-                      $('.inventory-item-notificaton-num').html(data);
-                    },
-                    complete: function() {
-                      setTimeout(worker, 3000);
-                    }
-                });
-            })();
-        }
-
-        itemNotificationCounter();
-
-    /*
-    $.post( "check.php", { user: $("#username").val() }, function (data){if(data=='1'){//do 1 }
-      elseif(data=='0'){//do 0 }});if(!isset($_POST['user'] || empty($_POST['user'])){
-       echo '0'; exit();} $username = trim($_POST['user']);
-    */
+    function itemNotificationCounter() {
+      return (function worker() {
+        $.ajax({
+            url: 'server-ajax/inventoryitemnotificationcounterajax',
+            success: function(data) {
+              $('.inventory-item-notificaton-num').html(data);
+            },
+            complete: function() {
+              setTimeout(worker, 5000);
+            }
+        });
+      })();
+    }
     </script>
 
+<?php
+    print '
+    <script type="text/javascript">
+        var userlevel;
+        userlevel = "'.$level.'";
+        if(userlevel == 1 || userlevel == 2) {
+          itemNotificationCounter();
+        }
+    </script>';
+?>
 <?php }} ?>

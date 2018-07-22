@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-namespace app\model\accounts 
+namespace app\model\accounts
 {
 	use \PDO;
 	use app\db\connection\DB;
@@ -11,8 +11,8 @@ namespace app\model\accounts
 
 		private $_model;
 
-		private $_id, 
-				$_username, 
+		private $_id,
+				$_username,
 				$_password,
 				$_firstname,
 				$_surname,
@@ -33,7 +33,7 @@ namespace app\model\accounts
 		* Create, Read(retrieve), Update, Delete
 		*/
 		public function createData() {
-			throw new \Exception('Not supported yet.'); 
+			throw new \Exception('Not supported yet.');
 		}
 
 		//retrieving data from tbl-accounts
@@ -46,11 +46,15 @@ namespace app\model\accounts
 			$stmt->execute();
 			$row = $stmt->fetch();
 
-			//fetching data 
+			//fetching data
+			if($data==='Id') {
+				return $this->_username = $this->_model->setID($row[$data])->getID();
+			}
+
 			if($data==='username') {
 				return $this->_username = $this->_model->setUsername($row[$data])->getUsername();
 			}
-			 
+
 			if ($data==='firstname') {
 				return $this->_firstname = $this->_model->setFirstname($row[$data])->getFirstname();
 			}
@@ -63,23 +67,21 @@ namespace app\model\accounts
 				return $this->_email = $this->_model->setEmail($row[$data])->getEmail();
 			}
 
-			if ($data==='level') { 
+			if ($data==='level') {
 				return $this->_level = $this->_model->setLevel($row[$data])->getLevel();
 			}
 
-			if ($data==='date_time') { 
+			if ($data==='date_time') {
 				return $this->_date = $this->_model->setDate($row[$data])->getDate();
 			}
 		}
 
 		public function updateData() {
-			throw new \Exception('Not supported yet.'); 
+			throw new \Exception('Not supported yet.');
 		}
 
 		public function deleteData() {
-			throw new \Exception('Not supported yet.'); 
+			throw new \Exception('Not supported yet.');
 		}
 	}
 }
-
-

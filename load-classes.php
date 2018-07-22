@@ -70,3 +70,5 @@ require_once 'app/data/inventory/InventorySearch.php';
 
 /******************** Cart ********************/
 require_once 'app/data/transaction/TransactionAddItem.php';
+require_once 'app/data/transaction/TransactItems.php';
+require_once 'app/data/transaction/TransactionLog.php';

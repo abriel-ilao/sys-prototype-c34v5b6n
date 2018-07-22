@@ -148,9 +148,12 @@ table {
 .pos-sub-item ul li a:active {
 	color:#0c5460;
 }
+.pos-sub-item ul li a:hover {
+	text-decoration:none;
+}
 .pos-sub-item .active-sub-item {
-	border-left:4px solid #0c5460;
-	padding-left:7px;
+	border-bottom:2px solid #0c5460;
+	padding-bottom:1px;
 }
 .pos-item-success ul {
 	list-style-type:none;
@@ -229,11 +232,53 @@ span#totalItems {
    padding-right:10px;
 }
 
+/* point of sale */
+.transact-error {
+	font-size:16px;
+	color:red;
+	display:none;
+	font-weight:500;
+	margin-left:10px;
+}
+.transactCompute, .btn-transact-items {
+	display:none;
+}
+
+/* transaction log */
+.current-month {
+	border:2px solid #7ed6df;
+}
+
+.table-transaction td {
+	border:1px solid #b2b2b2;
+}
+
+.col-t-odd {
+	background-color:#e5ffff;
+}
+
+.col-t-even {
+	background-color:#fff8e5;
+}
+
+.monthly-total,
+.yearly-total {
+	font-size:14px;
+	margin-bottom:5px;
+}
+
 /* bootstrap */
 .modal-dialog,
 .modal-content {
-    /* 80% of window height */
+    /* 85% of window height */
     height: 85%;
+}
+
+.modal-dialog-user-account,
+.modal-content-user-account,
+.modal-dialog-transaction,
+.modal-content-transaction {
+	height: auto !important;
 }
 
 .modal-body {

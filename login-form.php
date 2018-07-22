@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if(!isset($_COOKIE['e1ee8d72a7a553f68c2ce3beb7ad19c9'])) :
     require_once './frontend-ui/password.php';
@@ -33,17 +33,16 @@ $login = AccountsAdminLoginController::Create();
     <link rel="stylesheet" type="text/css" href="./css/sign-in.css">
 
     <!-- Font Awesome -->
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">-->
-    <link rel="stylesheet" type="text/css" href="./css/font-awesome.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
     <!-- Google Font -->
-    <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">--> 
+    <!--<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">-->
 
     <title>System Name 8c7v45b6n7m8d12a2nh16hfsw12l0da1</title>
   </head>
   <body class="text-center">
     <form class="form-signin" action="" method="POST">
-        <h2 class="pt-4 pb-4">[LOGO]</h2>     
+        <h2 class="pt-4 pb-4">[LOGO]</h2>
         <label for="inputUsername" class="sr-only">Username address</label>
         <input type="text" id="inputUsername" class="form-control mb-3 active" name="username" placeholder="Username" autocomplete="off" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
@@ -56,7 +55,7 @@ $login = AccountsAdminLoginController::Create();
             </label>
         </div>
 
-        <button class="btn btn-lg btn-info btn-block" type="submit" name="sub">Log In</button>
+        <button class="btn btn-lg btn-info btn-block" type="submit" name="sub"><i class="fa fa-sign-in-alt"></i> Log In</button>
 
         <div class="text-center">
             <?= $login->login('username', 'password', 'CSRFtoken'); ?>

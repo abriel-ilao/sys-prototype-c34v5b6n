@@ -3,39 +3,61 @@
 require_once './auth.php';
 
 use app\data\transaction\TransactionAddItem;
+use app\controller\accounts\AccountsAdminInfoController;
 
 if($auth) :
 
-$transac = TransactionAddItem::Create();
-$rows = $transac->readData();
+//init user's info controller
+$accountData = AccountsAdminInfoController::Create();
+//get user's ID
+$userID = $accountData->getData('Id');
 
-echo $rows;
-
-else:
-    require_once 'login-form.php';
-endif;
+$transact = TransactionAddItem::Create();
+$transact->readData();
 
 ?>
 <script type="text/javascript">
   $(document).ready(function()
    {
-     
+     //init tooltip
+     $(function () {
+       $('[data-toggle="tooltip"]').tooltip()
+     });
 
-    //init tooltip
-    $(function () {
-     $('[data-toggle="tooltip"]').tooltip()
-    });
+     $(".input-quantity").focus(function()
+     {
+       $(this).removeClass('is-invalid');
+       //text elements
+       $('.transact-error').fadeOut();
+       $('.transactCompute').text('').hide();
+       //buttons
+       $('.btn-checkout').show();
+       $('.btn-transact-items').hide();
+     });
 
     var cart = new Cart();
 
-    _objElement.btnDel.click(function()
+    _objElement.btnDel.click(function(e)
     {
       var itemId = $(this).attr("data-id");
+      e.preventDefault();
       cart.delProduct(itemId);
+
+      $.notify("Item removed", {position:"bottom left", autoHideDelay:"4000", className:"error"});
+
     });
 
-    _objElement.btnCheckout.click(function() {
+    _objElement.btnCheckout.click(function(e) {
+      e.preventDefault();
       cart.checkoutProduct();
+    });
+
+    //account user's ID
+    var userID = <?php echo $userID; ?>
+
+    _objElement.btnTransact.click(function(e) {
+      e.preventDefault();
+      cart.transactItems(userID);
     });
 
     if(Cookies.get('product-item') == null)
@@ -50,8 +72,10 @@ endif;
   });
 
   var _objElement = {
+    btnAdd : $('.btn-add-item'),
     btnDel : $('.btn-del-item'),
-    btnCheckout : $('.btn-checkout')
+    btnCheckout : $('.btn-checkout'),
+    btnTransact : $('.btn-transact-items')
   };
 
   function Cart()
@@ -113,11 +137,25 @@ endif;
               objCookie.removeCookie();
           }
 
+          /*
+          * dom manipulation
+          */
+
           //remove TR's element
           $('#tr-id-' + itemId).remove();
+          //remove td's element
+          $('.transactCompute').text('').hide();
+          //hide and show buttons
+          $('.btn-checkout').show();
+          $('.btn-transact-items').hide();
+
+          //subtract total items
+          $('#transactTotalItems').text(Number($('#transactTotalItems').text() - 1));
 
           console.log('updated cookie: ' + objCookie.getCookie());
-
+          /*
+          * end dom manipulation
+          */
         });
 
         //init - delCookie
@@ -137,33 +175,293 @@ endif;
             cookieNewValue : ''
           }
 
+          var calc = {
+            //description
+            desc : '',
+            //available stock
+            qAvailableStock : '',
+            //quantity item
+            qItem : '',
+            //quantity item [indexOf (.)]
+            qItemIndexDot : '',
+            //text - transact total items
+            totalItems : '',
+            totalPrice : 0,
+            total : 0,
+            //input - error quantity
+            errorQuantity : 0,
+            //input - error stock
+            errorStock : 0
+          }
+
           //split a cookie array values
           var indexCookie = objCookie.getCookie().split(objCookie.strSplit);
 
-          var qItemcounter = 0;
+          /*
+          * dom manipulation
+          */
+
+          //input validation for item quantity and item stock
           //find the existing item in a cookie array values
           for (var i = 1; i < indexCookie.length; i++)
           {
+            //input - available stock
+            calc.qAvailableStock = Number($('#q-available-stock-'+indexCookie[i]).val());
+            //input - quantity
+            calc.qItem = Number($('#q-item-'+indexCookie[i]).val());
+            //find [.] in input quantity
+            calc.qItemIndexDot = Number($('#q-item-'+indexCookie[i]).val().indexOf('.'));
 
-            /* I stopped here */
-            //alert($('#q-item-'+indexCookie[i]).val());
-            alert('Check out!')
+            if(calc.qItem == '' || calc.qItem == 0 || calc.qItem < 0 || calc.qItemIndexDot != -1)
+            {
+              calc.errorQuantity++;
+              $('#q-item-'+indexCookie[i]).addClass('is-invalid');
+              $('.transact-error').fadeIn().text('Invalid input... please review the items.');
+            }
 
-            //console.log(indexCookie[i]);
-          //store item value to cookie.cookieArr
-          //cookie.cookieArr.push(indexCookie[i]);
-            //if split item value matches with selected item
-            //if(indexCookie[i] == itemId) {
-              //delete specific array value if string matches
-              //cookie.cookieArr.splice(cookie.cookieArr.indexOf(indexCookie[i]), 1);
-            //}
+            if(calc.qItem > calc.qAvailableStock)
+            {
+              calc.errorStock++;
+              $('#q-item-'+indexCookie[i]).addClass('is-invalid');
+              $('.transact-error').fadeIn().text('Input > stock... please review the items.');
+            }
           }
+
+          //if input validations are successful
+          //if there are no errors in checking #q-item id - [q!=(0,'','a-z,A-Z', '!@#$%^&*()~ and so on...')]
+          //if input quantity is greater than a. stock
+          if(calc.errorQuantity == 0 && calc.errorStock == 0)
+          {
+            //input validation for item quantity and item stock
+            for (var i = 1; i < indexCookie.length; i++)
+            {
+              //input - description
+              calc.desc = __ucwords(__strtolower($('#description-'+indexCookie[i]).val()));
+              //input - quantity item
+              calc.qItem = Number($('#q-item-'+indexCookie[i]).val());
+              //input - selling price
+              calc.sPrice = Number($('#selling-price-'+indexCookie[i]).val());
+              //input - total items
+              calc.totalItems = Number($('#transactTotalItems').text());
+
+              //compute total price
+              calc.totalPrice = calc.qItem * calc.sPrice;
+              //compute total
+              calc.total += calc.totalPrice;
+
+              $('.transactCompute').fadeIn().append(
+                '<p><strong>'+calc.desc+'</strong><br>Quantity: <strong>'+__numberWithCommas(calc.qItem)+'</strong><br>Selling price: <strong>₱'+__numberWithCommas(calc.sPrice)+'</strong><br>Total Price: <strong>₱'+__numberWithCommas(calc.totalPrice.toFixed(1))+'</strong><hr></p>');
+            }
+
+            $('.transactCompute').append('<strong><span style="color:#3742fa;">'+'Total: ₱'+__numberWithCommas(calc.total.toFixed(1))+'</span></strong><hr>');
+
+            $('.transactCompute').append('<div class="mt-2 mb-2"><strong>OR Number:</strong><input type="number" id="transact-or-num" class="form-control" placeholder="OR Number..." style="width:140px;"></div>');
+
+            //hide checkout button
+            $('.btn-checkout').hide();
+            //show transact button
+            $('.btn-transact-items').fadeIn();
+          }
+
+          /*
+          * end dom manipulation
+          */
+
         });
 
         return checkout();
       }
     }
+
+    this.transactItems = function(userID)
+    {
+      if(objCookie.getCookie() != null)
+      {
+        //alert(objCookie.getCookie())
+        var transact = (function()
+        {
+
+          var cookie = {
+            cookieArr : [],
+            cookieCounter : '',
+            cookieNewValue : ''
+          };
+
+          var salesReport = {
+            //item_code
+            itmCode : '',
+            //description
+            desc : '',
+            //material type
+            mType : '',
+            //quantity item
+            qItem : '',
+            //buying price
+            bPrice : '',
+            //trukcing fee
+            tFee : '',
+            //monthly expenses
+            mExpenses : '',
+            //profit
+            profit : '',
+            //total profit
+            tProfit : 0,
+            //text - transact total items, total price, total
+            totalItems : '',
+            totalPrice : 0,
+            total : 0
+          };
+
+          var insert = {
+            or_number : '',
+            userId : '',
+            item_code : '',
+            description : '',
+            material_type : '',
+            quantity : '',
+            selling_price : '',
+            total_price : '',
+            profit : '',
+            total_profit : '',
+            total : '',
+            strSplit : '∎'
+          }
+
+          //split a cookie array values
+          var indexCookie = objCookie.getCookie().split(objCookie.strSplit);
+
+          /*
+          * dom manipulation
+          */
+
+          var transactOrNum = Number($('#transact-or-num').val()),
+          //find [.] in input or number
+          transactOrNumIndexDot = Number($('#transact-or-num').val().indexOf('.'));
+
+          //validate
+          if(transactOrNum == '' || transactOrNum == 0 || transactOrNum < 0 || transactOrNumIndexDot != -1)
+          {
+            $('.transact-error').fadeIn().text('Invalid input...');
+            //show input warning
+            $('#transact-or-num').addClass('is-invalid');
+            setTimeout(function()
+            {
+              $('.transact-error').fadeOut();
+              //remove input warning
+              $('#transact-or-num').removeClass('is-invalid');
+            }, 2500);
+          }
+          else
+          {
+            //disable the transact button
+            $('.btn-transact-items').attr('disabled', 'disabled');
+            $('.btn-transact-items').removeClass('btn-primary').addClass('btn-default');
+
+            //input validation for item quantity and item stock
+            for (var i = 1; i < indexCookie.length; i++)
+            {
+              //input item_code
+              salesReport.itmCode = $('#item-code-'+indexCookie[i]).val();
+              //input description
+              salesReport.desc = __ucwords(__strtolower($('#description-'+indexCookie[i]).val()));
+              //input material Type
+              salesReport.mType = __ucwords(__strtolower($('#material-type-'+indexCookie[i]).val()));
+              //input - item quantity
+              salesReport.qItem = Number($('#q-item-'+indexCookie[i]).val());
+              //input - item selling price
+              salesReport.sPrice = Number($('#selling-price-'+indexCookie[i]).val());
+              //input - buying price
+              salesReport.bPrice = Number($('#buying-price-'+indexCookie[i]).val());
+              //input - trucking fee
+              salesReport.tFee = Number($('#trucking-fee-'+indexCookie[i]).val());
+              //input - monthly expenses
+              salesReport.mExpenses = Number($('#monthly-expenses-'+indexCookie[i]).val());
+              //compute profit
+              salesReport.profit = Number($('#profit-'+indexCookie[i]).val());
+
+              //compute total price
+              salesReport.totalPrice = salesReport.qItem * salesReport.sPrice;
+              //compute total profit
+              salesReport.tProfit = salesReport.qItem * salesReport.profit;
+              //compute total
+              salesReport.total += salesReport.totalPrice;
+
+              /*console.log('Description: ' + salesReport.desc);
+              console.log('Quantity: ' + salesReport.qItem);
+              console.log('Selling Price: ' + salesReport.sPrice.toFixed(1));
+              console.log('Total Price: ' + salesReport.totalPrice.toFixed(1));
+              console.log('Profit: ' + salesReport.profit);
+              console.log('Total Profit: ' + salesReport.tProfit.toFixed(1));
+              console.log('---------------------');*/
+
+              insert.item_code      += insert.strSplit + salesReport.itmCode;
+              insert.description    += insert.strSplit + salesReport.desc;
+              insert.material_type    += insert.strSplit + salesReport.mType;
+              insert.quantity       += insert.strSplit + salesReport.qItem;
+              insert.selling_price  += insert.strSplit + salesReport.sPrice.toFixed(1);
+              insert.total_price    += insert.strSplit + salesReport.totalPrice.toFixed(1);
+              insert.profit         += insert.strSplit + salesReport.profit;
+              insert.total_profit   += insert.strSplit + salesReport.tProfit.toFixed(1);
+
+            }
+            //console.log('Total: ' + salesReport.total.toFixed(1));
+            insert.total = salesReport.total.toFixed(1);
+            insert.userId = userID;
+            insert.or_number = transactOrNum;
+
+            //please wait
+            $('.wrapper-please-wait').show();
+            $('.please-wait').show();
+
+            $.ajax({
+                url: "server-ajax/transactajax",
+                type: "POST",
+                data: {item_code: insert.item_code, or_number: insert.or_number, description: insert.description, material_type: insert.material_type, quantity: insert.quantity, selling_price: insert.selling_price, total_price: insert.total_price, profit: insert.profit, total_profit: insert.total_profit, total: insert.total, userId: insert.userId},
+                success: function() {
+                    //hide please wait
+                    $('.wrapper-please-wait').hide();
+                    $('.please-wait').hide();
+                    //show successful message
+                    $('.transact-success').fadeIn().html('<span style="color:#16a085;"><strong>Transaction was successful</strong></span>');
+                    //disable or number
+                    $('#transact-or-num').attr('disabled', 'disabled');
+                    //disable input quantity
+                    $('.input-quantity').attr('disabled', 'disabled');
+                    //disable del item
+                    $('.btn-del-item').removeClass('btn-danger').addClass('btn-default').attr('disabled', 'disabled');
+                    //notify
+                    $.notify("Transaction was successful!", {position:"bottom left", autoHideDelay:"4000", className:"success"});
+
+                    //remove cookie
+                    Cookies.remove('product-item');
+
+                    console.log("AJAX request was successful - action=INSERT");
+                },
+                complete: function(data) {
+                    console.log("AJAX request was completed - action=INSERT");
+                },
+                error:function(){
+                    console.log("AJAX request was a failure - action=INSERT");
+                }
+            });
+
+          }
+          /*
+          * end dom manipulation
+          */
+        });
+
+        return transact();
+      }
+    }
   }
 
-
 </script>
+
+<?php
+
+else:
+    require_once 'login-form.php';
+endif;
+
+?>
