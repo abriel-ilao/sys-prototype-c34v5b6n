@@ -276,6 +276,8 @@ span#totalItems {
 
 .modal-dialog-user-account,
 .modal-content-user-account,
+.modal-dialog-inventory-summation,
+.modal-content-inventory-summation,
 .modal-dialog-transaction,
 .modal-content-transaction {
 	height: auto !important;

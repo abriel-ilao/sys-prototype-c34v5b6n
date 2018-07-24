@@ -40,6 +40,10 @@ Flight::route('/transactionlog', function(){
     include 'transactionlog.php';
 });
 
+Flight::route('/returnitems', function(){
+    include 'returnitems.php';
+});
+
 /* server-ajax requests */
 Flight::route('/server-ajax/inventoryajax', function(){
     include './server-ajax/inventoryajax.php';
@@ -77,8 +81,60 @@ Flight::route('/server-ajax/transactajax', function(){
     include './server-ajax/transactajax.php';
 });
 
-Flight::route('/server-ajax/transactionlogajax', function(){
-    include './server-ajax/transactionlogajax.php';
+Flight::route('/server-ajax/returnitemsaddajax', function(){
+    include './server-ajax/returnitemsaddajax.php';
+});
+
+Flight::route('/server-ajax/returnitemsajax', function(){
+    include './server-ajax/returnitemsajax.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-1', function(){
+    include './server-ajax/transactionlogajax-1.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-2', function(){
+    include './server-ajax/transactionlogajax-2.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-3', function(){
+    include './server-ajax/transactionlogajax-3.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-4', function(){
+    include './server-ajax/transactionlogajax-4.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-5', function(){
+    include './server-ajax/transactionlogajax-5.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-6', function(){
+    include './server-ajax/transactionlogajax-6.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-7', function(){
+    include './server-ajax/transactionlogajax-7.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-8', function(){
+    include './server-ajax/transactionlogajax-8.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-9', function(){
+    include './server-ajax/transactionlogajax-9.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-10', function(){
+    include './server-ajax/transactionlogajax-10.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-11', function(){
+    include './server-ajax/transactionlogajax-11.php';
+});
+
+Flight::route('/server-ajax/transactionlogajax-12', function(){
+    include './server-ajax/transactionlogajax-12.php';
 });
 
 Flight::route('/server-ajax/transactionlogyearajax', function(){

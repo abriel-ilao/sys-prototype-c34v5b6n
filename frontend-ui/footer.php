@@ -83,6 +83,9 @@ class Footer {
             $('ul.m-header-main-menu-list .m-header-main-menu-li-transaction-log').click(function() {
                 window.location.replace('transactionlog');
             });
+            $('ul.m-header-main-menu-list .m-header-main-menu-li-return-items').click(function() {
+                window.location.replace('returnitems');
+            });
             //sub
             $('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(1)').click(function() {
                 window.location.replace('pos');

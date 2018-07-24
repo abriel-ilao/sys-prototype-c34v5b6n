@@ -47,16 +47,22 @@ class Header {
         $item4 = $main_menu;
         $m_item4 = $m_main_menu;
     }
+    if ($active == 5) {
+        $item5 = $main_menu;
+        $m_item5 = $m_main_menu;
+    }
     //!active
     if($active == 0) {
         $item1 = '';
         $item2 = '';
         $item3 = '';
         $item4 = '';
+        $item5 = '';
         $m_item1 = '';
         $m_item2 = '';
         $m_item3 = '';
         $m_item4 = '';
+        $m_item5 = '';
     }
 ?>
 
@@ -144,8 +150,11 @@ class Header {
                 <li class="nav-item <?=@$item3;?>">
                     <a class="nav-link show-please-wait" href="transactionlog"><i class="fa fa-desktop"></i> TRANSACTION LOG</a>
                 </li>
-                <?php if($level == 1) : ?>
                 <li class="nav-item <?=@$item4;?>">
+                    <a class="nav-link show-please-wait" href="returnitems"><i class="fa fa-undo-alt"></i> RETURN ITEMS</a>
+                </li>
+                <?php if($level == 1) : ?>
+                <li class="nav-item <?=@$item5;?>">
                     <a class="nav-link show-please-wait" href="#"><i class="fa fa-user"></i> ACCOUNTS</a>
                 </li>
                 <?php endif; ?>
@@ -254,7 +263,8 @@ class Header {
                             </ul>
                         </li>
                         <?php endif; ?>
-                        <li class="m-header-main-menu-li m-header-main-menu-li-transaction-log"><i class="fa fa-desktop text-danger"></i><span style="padding-left:21px;">TRANSACTION LOG</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-transaction-log"><i class="fa fa-desktop text-success"></i><span style="padding-left:21px;">TRANSACTION LOG</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-return-items"><i class="fa fa-undo-alt text-danger"></i><span style="padding-left:24px;">RETURN ITEMS</span></li>
                         <?php if($level == 1): ?>
                         <li class="m-header-main-menu-li">&nbsp;<i class="fa fa-user text-warning"></i><span style="padding-left:21px;">ACCOUNTS</span></li>
                         <?php endif;?>

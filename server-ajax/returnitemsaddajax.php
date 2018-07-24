@@ -1,8 +1,12 @@
 <?php
+/*
+* a copy of product transaction's source code - cart
+* Return items / Refundables - cartReturn
+*/
 
 require_once './auth.php';
 
-use app\data\transaction\TransactionAddItem;
+use app\data\returnitems\ReturnItemsAddItem;
 use app\controller\accounts\AccountsAdminInfoController;
 
 if($auth) :
@@ -12,8 +16,8 @@ $accountData = AccountsAdminInfoController::Create();
 //get user's ID
 $userID = $accountData->getData('Id');
 
-$transact = TransactionAddItem::Create();
-$transact->readData();
+$returnItems = ReturnItemsAddItem::Create();
+$returnItems->readData();
 
 ?>
 <script type="text/javascript">
@@ -56,7 +60,7 @@ $transact->readData();
       cart.transactItems(userID);
     });
 
-    if(Cookies.get('product-item') == null)
+    if(Cookies.get('return-product-item') == null)
     {
       $('.h-class').fadeIn();
     }
@@ -78,13 +82,13 @@ $transact->readData();
   {
     var objCookie = {
       getCookie : function() {
-        return Cookies.get('product-item');
+        return Cookies.get('return-product-item');
       },
       setCookie : function(cookieValue) {
-        Cookies.set('product-item', cookieValue, { expires: 1 });
+        Cookies.set('return-product-item', cookieValue, { expires: 1 });
       },
       removeCookie : function() {
-        Cookies.remove('product-item');
+        Cookies.remove('return-product-item');
       },
       strSplit : '∎'
     };
@@ -148,6 +152,7 @@ $transact->readData();
           //subtract total items
           $('#transactTotalItems').text(Number($('#transactTotalItems').text() - 1));
 
+          console.log('Return items');
           console.log('updated cookie: ' + objCookie.getCookie());
           /*
           * end dom manipulation
@@ -420,7 +425,7 @@ $transact->readData();
             $('#searchText, #m-searchText').val('');
 
             $.ajax({
-                url: "server-ajax/transactajax",
+                url: "server-ajax/returnitemsajax",
                 type: "POST",
                 data: {cookie_id: insert.cookieId, item_code: insert.item_code, or_number: insert.or_number, description: insert.description, material_type: insert.material_type, quantity: insert.quantity, selling_price: insert.selling_price, total_price: insert.total_price, profit: insert.profit, total_profit: insert.total_profit, total: insert.total, userId: insert.userId},
                 success: function() {
@@ -428,7 +433,7 @@ $transact->readData();
                     $('.wrapper-please-wait').hide();
                     $('.please-wait').hide();
                     //show successful message
-                    $('.transact-success').fadeIn().html('<span style="color:#16a085;"><strong>Transaction was successful</strong></span>');
+                    $('.transact-success').fadeIn().html('<span style="color:#16a085;"><strong>Return items was successful</strong></span>');
                     //disable or number
                     $('#transact-or-num').attr('disabled', 'disabled');
                     //disable input quantity
@@ -436,11 +441,11 @@ $transact->readData();
                     //disable del item
                     $('.btn-del-item').removeClass('btn-danger').addClass('btn-default').attr('disabled', 'disabled');
                     //notify
-                    $.notify("Transaction was successful!", {position:"bottom left", autoHideDelay:"4000", className:"success"});
+                    $.notify("Return items was successful!", {position:"bottom left", autoHideDelay:"4000", className:"success"});
 
                     //remove cookie
-                    Cookies.remove('product-item');
-
+                    Cookies.remove('return-product-item');
+                    console.log('Return items');
                     console.log("AJAX request was successful - action=INSERT");
                 },
                 complete: function(data) {

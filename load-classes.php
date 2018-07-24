@@ -68,7 +68,11 @@ require_once 'app/data/inventory/InventoryPaginate.php';
 require_once 'app/data/inventory/InventoryItemNotification.php';
 require_once 'app/data/inventory/InventorySearch.php';
 
-/******************** Cart ********************/
+/******************** Transaction ********************/
 require_once 'app/data/transaction/TransactionAddItem.php';
 require_once 'app/data/transaction/TransactItems.php';
 require_once 'app/data/transaction/TransactionLog.php';
+
+/******************** Return Items ********************/
+require_once 'app/data/returnitems/ReturnItemsAddItem.php';
+require_once 'app/data/returnitems/ReturnItems.php';

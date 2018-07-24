@@ -79,7 +79,7 @@ Header::Create($active);
               </div>
               <div id="january" class="collapse" aria-labelledby="jan" data-parent="#accordionExample">
                 <div class="card-body" id="month-1">
-									<img src="img/34.gif" height="50" width="50"/>
+
                 </div>
               </div>
             </div>
@@ -97,6 +97,7 @@ Header::Create($active);
               </div>
               <div id="february" class="collapse" aria-labelledby="feb" data-parent="#accordionExample">
                 <div class="card-body" id="month-2">
+
                 </div>
               </div>
             </div>
@@ -114,6 +115,7 @@ Header::Create($active);
               </div>
               <div id="march" class="collapse" aria-labelledby="mar" data-parent="#accordionExample">
                 <div class="card-body" id="month-3">
+
                 </div>
               </div>
             </div>
@@ -131,6 +133,7 @@ Header::Create($active);
               </div>
               <div id="april" class="collapse" aria-labelledby="apr" data-parent="#accordionExample">
                 <div class="card-body" id="month-4">
+
                 </div>
               </div>
             </div>
@@ -142,12 +145,13 @@ Header::Create($active);
               <div class="card-header" id="_may">
                 <h5 class="mb-0">
                   <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#may" aria-expanded="false" aria-controls="may">
-                    <strong><span class="text-info"><span class="text-info">May</span></span></strong>
+                    <strong><span class="text-info">May</span></strong>
                   </button>
                 </h5>
               </div>
               <div id="may" class="collapse" aria-labelledby="_may" data-parent="#accordionExample">
                 <div class="card-body" id="month-5">
+
                 </div>
               </div>
             </div>
@@ -165,6 +169,7 @@ Header::Create($active);
               </div>
               <div id="june" class="collapse" aria-labelledby="jun" data-parent="#accordionExample">
                 <div class="card-body" id="month-6">
+
                 </div>
               </div>
             </div>
@@ -182,6 +187,7 @@ Header::Create($active);
               </div>
               <div id="july" class="collapse" aria-labelledby="jul" data-parent="#accordionExample">
                 <div class="card-body" id="month-7">
+
                 </div>
               </div>
             </div>
@@ -199,6 +205,7 @@ Header::Create($active);
               </div>
               <div id="august" class="collapse" aria-labelledby="aug" data-parent="#accordionExample">
                 <div class="card-body" id="month-8">
+
                 </div>
               </div>
             </div>
@@ -216,6 +223,7 @@ Header::Create($active);
               </div>
               <div id="september" class="collapse" aria-labelledby="sept" data-parent="#accordionExample">
                 <div class="card-body" id="month-9">
+
                 </div>
               </div>
             </div>
@@ -233,6 +241,7 @@ Header::Create($active);
               </div>
               <div id="october" class="collapse" aria-labelledby="oct" data-parent="#accordionExample">
                 <div class="card-body" id="month-10">
+
                 </div>
               </div>
             </div>
@@ -250,6 +259,7 @@ Header::Create($active);
               </div>
               <div id="november" class="collapse" aria-labelledby="nov" data-parent="#accordionExample">
                 <div class="card-body" id="month-11">
+
                 </div>
               </div>
             </div>
@@ -267,6 +277,7 @@ Header::Create($active);
               </div>
               <div id="december" class="collapse" aria-labelledby="dec" data-parent="#accordionExample">
                 <div class="card-body" id="month-12">
+
                 </div>
               </div>
             </div>
@@ -288,24 +299,45 @@ $month = SimpleDate::Create()->getFormat('m');
 	var level = <?php echo $level; ?>
 
 	$(document).ready(function() {
-
 		//**default year value
 		//get selected year value
 		var yyyy = $('#selectedYear').val();
-		//init month with selected year
-		monthly(yyyy);
+		//init yearly,monthly,reloadData
 		yearly(yyyy);
+		monthly(yyyy);
+		reloadData(yyyy);
 
 		$('#selectedYear').change(function()
 		{
 			//please wait
 			$('.wrapper-please-wait').show();
 			$('.please-wait').show();
+
 			var selectedYear = $(this).val();
 			monthly(selectedYear);
 			yearly(selectedYear);
+			reloadData(selectedYear);
 		});
 	});
+
+	function reloadData(selectedYear) {
+
+		var btnReload = function(m) {
+			$('#reloadMonth-'+m).click(function(e) {
+				//please wait
+				$('.wrapper-please-wait').show();
+				$('.please-wait').show();
+
+				e.preventDefault();
+				transactionLog(selectedYear, m);
+			});
+		}
+
+		for(var m=1; m <= 12; m++)
+		{
+			btnReload(m);
+		}
+	}
 
 	function monthly(selectedYear)
 	{
@@ -318,7 +350,7 @@ $month = SimpleDate::Create()->getFormat('m');
 	function transactionLog(selectedYear, m) {
 		//alert(value);
 		$.ajax({
-				url:"server-ajax/transactionlogajax",
+				url:'server-ajax/transactionlogajax-'+m,
 				method:"post",
 				data:{year:selectedYear, month:m, level:level},
 				success:function(data)
@@ -328,6 +360,15 @@ $month = SimpleDate::Create()->getFormat('m');
 					$('.please-wait').hide();
 
 					$('#month-'+m).html(data);
+				},
+				error:function(){
+						$('#month-'+m).html('');
+
+						console.log('Error month'+m);
+
+						$('#month-'+m).append('<button id="reloadMonth-'+m+'" class="btn btn-warning btn-sm"><strong>Reload Data</strong></button>');
+
+						reloadData(selectedYear);
 				}
 		});
 	}
