@@ -110,7 +110,7 @@ function searchItems() {
         <?php if($level == 1 || $level == 2) : ?>
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <div class="h6-responsive h-inventory" id="add"><i class="fa fa-cart-arrow-down"></i> Add Inventory Item</div>
+                    <div class="h6-responsive h-inventory" id="add"><i class="fa fa-cart-arrow-down"></i> Add Inventory Item <span class="m-sub-menu-link float-right"><a href="inventory" class="text-info"><i class="fa fa-tag"></i> View</a></span></div>
                     <form action="" method="POST" id="inventoryAdd" role="form">
                         <!--<form action="pos" method="POST">-->
                         <div class="form-group row">

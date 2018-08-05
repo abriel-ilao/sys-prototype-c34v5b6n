@@ -44,7 +44,15 @@ Flight::route('/returnitems', function(){
     include 'returnitems.php';
 });
 
+Flight::route('/accounts', function(){
+    include 'accounts.php';
+});
+
 /* server-ajax requests */
+Flight::route('/server-ajax/accounteditinfoajax', function(){
+    include './server-ajax/accounteditinfoajax.php';
+});
+
 Flight::route('/server-ajax/inventoryajax', function(){
     include './server-ajax/inventoryajax.php';
 });
@@ -139,6 +147,10 @@ Flight::route('/server-ajax/transactionlogajax-12', function(){
 
 Flight::route('/server-ajax/transactionlogyearajax', function(){
     include './server-ajax/transactionlogyearajax.php';
+});
+
+Flight::route('/server-ajax/transactiondelreturnitems', function(){
+    include './server-ajax/transactiondelreturnitems.php';
 });
 
 /*Flight::route('/??/@id:[0-9]{2}', function($id){

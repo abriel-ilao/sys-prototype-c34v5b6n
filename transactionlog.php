@@ -30,7 +30,7 @@ Header::Create($active);
 		<div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <h1 class="h6 mt-2"><i class="fa fa-edit"></i> Transaction Log</h1>
+                    <h1 class="h6 mt-2"><i class="fa fa-desktop"></i> Transaction Log</h1>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@ Header::Create($active);
         <div class="container">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <h1 class="h6 mt-2"><i class="fa fa-edit"></i> Transaction Log</h1>
+                    <h1 class="h6 mt-2"><i class="fa fa-desktop"></i> Transaction Log</h1>
                 </div>
                 <div class="col-12 col-lg-6">
                 </div>
@@ -385,6 +385,7 @@ $month = SimpleDate::Create()->getFormat('m');
 				}
 		});
 	}
+
 
 </script>
 

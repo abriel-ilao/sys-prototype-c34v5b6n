@@ -33,7 +33,62 @@ class Footer {
     <!-- init -->
     <script type="text/javascript">
     $(document).ready(function() {
-        /*** Header-m - Navicon toggle ***/
+
+        /*** edit account's information ***/
+        function btnEditInfo() {
+          $('.btn-edit-info').click(function()
+          {
+            $('.edit-info').slideToggle();
+          });
+        }
+        btnEditInfo();
+
+        function editInfo() {
+          $('#editinfo').submit(function(e) {
+
+              //preventing a page refresh
+              e.preventDefault();
+
+              //disable submit button
+              //$('#submit-save').attr('disabled', 'disabled');
+
+              //please wait
+              $('.wrapper-please-wait').show();
+              $('.please-wait').show();
+
+              //adding inventory item using ajax
+              $.ajax({
+                  url: "server-ajax/accounteditinfoajax",
+                  type: "POST",
+                  data: $('#c_firstname, #c_lastname, #c_email').serialize(),
+                  success: function() {
+                      //hide please wait
+                      $('.wrapper-please-wait').hide();
+                      $('.please-wait').hide();
+
+                      //account info
+                      var fname = __ucwords(__strtolower($('#c_firstname').val()));
+                      var sname = __ucwords(__strtolower($('#c_lastname').val()));
+                      var email = $('#c_email').val();
+
+                      //display account info
+                      $('.txt-fname-display').text(fname);
+                      $('.txt-sname-display').text(sname);
+                      $('.txt-email-display').text(email);
+                      $('.name-edit-info').text(fname+' '+sname);
+                  },
+                  complete: function(data) {
+                      console.log("AJAX request was completed - action=INSERT");
+                  },
+                  error:function(){
+                      console.log("AJAX request was a failure - action=INSERT");
+                  }
+              });
+          });
+        }
+        editInfo();
+
+        // Header-m - Navicon toggle
         function navicon() {
             $('.navicon-icon').click(function() {
                  $('.m-nav').animate({left: '0'});
@@ -73,30 +128,20 @@ class Footer {
         showInventorySub('li.m-header-main-menu-li-point-of-sale', 'ul.m-header-main-menu-list-sub-point-of-sale');
 
         //main menu link
-        function main_menu_link() {
-            $('ul.m-header-main-menu-list .m-header-main-menu-li:nth-child(1)').click(function() {
-                window.location.replace('#');
-            });
-            $('ul.m-header-main-menu-list .m-header-main-menu-li:nth-child(3)').click(function() {
-                window.location.replace('#');
-            });
-            $('ul.m-header-main-menu-list .m-header-main-menu-li-transaction-log').click(function() {
-                window.location.replace('transactionlog');
-            });
-            $('ul.m-header-main-menu-list .m-header-main-menu-li-return-items').click(function() {
-                window.location.replace('returnitems');
-            });
-            //sub
-            $('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(1)').click(function() {
-                window.location.replace('pos');
-            });
-            $('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(2)').click(function() {
-                window.location.replace('inventory');
-            });
+        function main_menu_link(elem, link) {
+          $(elem).click(function() {
+            window.location.replace(link);
+          });
         }
-        main_menu_link();
 
-        /*** back to top smooth-scroll ***/
+        //main menu => inventory -> sub link | transactionlog | returnitems | accounts
+        main_menu_link('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(1)', 'pos');
+        main_menu_link('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(2)', 'inventory');
+        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-transaction-log', 'transactionlog');
+        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-return-items', 'returnitems');
+        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-accounts', 'accounts');
+
+        // back to top smooth-scroll
         function scrollBackToTop(backToTop) {
             //scroll percentage
             $(window).scroll(function() {
@@ -124,7 +169,7 @@ class Footer {
         }
         scrollSmooth('.smooth-scroll');
 
-        /*** Animation ***/
+        // Animation
         function removeAnimationIESafari() {
             //If the user is using Internet Explorer or Safari
             if (navigator.appName == 'Microsoft Internet Explorer' ||  !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv:11/)) || (typeof $.browser !== "undefined" && $.browser.msie == 1) || (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1))

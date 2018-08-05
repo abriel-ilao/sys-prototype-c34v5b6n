@@ -7,6 +7,10 @@ table {
 	background-color:#ffffff !important;
 }
 
+.edit-info {
+	display:none;
+}
+
 .panel-x {
 	background-color:#ffffff;
 	border:1px solid #dcdde1;
@@ -246,7 +250,7 @@ span#totalItems {
 
 /* transaction log */
 .current-month {
-	border:2px solid #7ed6df;
+	border:2px solid #f6b93b;
 }
 
 .table-transaction td {
@@ -265,6 +269,21 @@ span#totalItems {
 .yearly-total {
 	font-size:14px;
 	margin-bottom:5px;
+}
+
+.tbl-return-items-1,
+.tbl-return-items-2,
+.tbl-return-items-3,
+.tbl-return-items-4,
+.tbl-return-items-5,
+.tbl-return-items-6,
+.tbl-return-items-7,
+.tbl-return-items-8,
+.tbl-return-items-9,
+.tbl-return-items-10,
+.tbl-return-items-11,
+.tbl-return-items-12 {
+	display:none;
 }
 
 /* bootstrap */

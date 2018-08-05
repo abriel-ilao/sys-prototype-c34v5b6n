@@ -110,7 +110,7 @@ function searchItems() {
     <div class="container panel-x">
 		<div class="row">
         	<div class="col-12">
-        	<div class="h6-responsive h-inventory" id="view"><i class="fa fa-tag"></i> Inventory Items</div>
+        	<div class="h6-responsive h-inventory" id="view"><i class="fa fa-tag"></i> Inventory Items <span class="m-sub-menu-link float-right"><a href="pos" class="text-info"><i class="fa fa-cart-arrow-down"></i> Add</a></span></div>
 					<?php if($level == 1 || $level == 2) : ?>
 					<?= $paginate->totalItemsSummation(); ?>
             <div class="mb-3"><a href="#" data-toggle="modal" data-target="#compute_items" class="btn btn-info btn-sm">Summation of Inventory</a></div>

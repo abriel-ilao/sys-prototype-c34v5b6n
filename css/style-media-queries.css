@@ -27,8 +27,8 @@ header.m-header-main a:active {
 	color:#0c5460;
 }
 
-header.m-nav {	
-	top:0;	
+header.m-nav {
+	top:0;
 	position:fixed;
 	z-index:99999;
 	background-color:#ffffff;
@@ -229,7 +229,11 @@ div.m-search {
 @media (min-width: 768px) {
 	header.m-header-main, header.m-nav, div.m-search, div.header-pad
 	{
-		display:none; 
+		display:none;
+	}
+	/* sub menu link */
+	.m-sub-menu-link {
+		display:none;
 	}
 }
 
@@ -239,8 +243,3 @@ div.m-search {
 	    left: 35%;
 	}
 }
-
-
-
-
-

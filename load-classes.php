@@ -52,11 +52,14 @@ require_once 'app/lib/validation/validator/MinStr.php';
 require_once 'app/lib/validation/validator/RequiredStr.php';
 require_once 'app/lib/validation/validator/UniqueStr.php';
 
-/******************** DATA ********************/
 
 /******************** Change Password ********************/
 require_once 'app/data/accounts/AccountsChangePassModel.php';
 require_once 'app/data/accounts/AccountsChangePass.php';
+
+/******************** Edit Info ********************/
+require_once 'app/data/accounts/AccountsEditInfo.php';
+require_once 'app/data/accounts/AccountsEditInfoModel.php';
 
 /******************** Inventory ********************/
 require_once 'app/data/inventory/InventoryModel.php';
@@ -72,6 +75,7 @@ require_once 'app/data/inventory/InventorySearch.php';
 require_once 'app/data/transaction/TransactionAddItem.php';
 require_once 'app/data/transaction/TransactItems.php';
 require_once 'app/data/transaction/TransactionLog.php';
+require_once 'app/data/transaction/TransactionDelReturnItems.php';
 
 /******************** Return Items ********************/
 require_once 'app/data/returnitems/ReturnItemsAddItem.php';

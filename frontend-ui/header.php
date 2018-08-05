@@ -116,7 +116,7 @@ class Header {
                 <div class="col-12 col-md-8">
                     <div class="account-menu text-right">
                         <ul>
-                            <li class="m-user-admin"><span class="user-admin"><i class="fa fa-user-shield"></i></span> <a href="#" data-toggle="modal" data-target="#modalAccountInfo"><?=$fname.' '.$sname;?></a> </li>
+                            <li class="m-user-admin"><span class="user-admin"><i class="fa fa-user-shield"></i></span> <a href="#" data-toggle="modal" data-target="#modalAccountInfo"><span class="name-edit-info"><?=$fname.' '.$sname;?></span></a> </li>
                             <li><a href="changepass" class="show-please-wait"><i class="fa fa-edit"></i> Change Password</a> </li>
                             <li><a href="logout.php" class="show-please-wait"><i class="fa fa-sign-out-alt"></i> Log Out</a></li>
                         </ul>
@@ -155,7 +155,7 @@ class Header {
                 </li>
                 <?php if($level == 1) : ?>
                 <li class="nav-item <?=@$item5;?>">
-                    <a class="nav-link show-please-wait" href="#"><i class="fa fa-user"></i> ACCOUNTS</a>
+                    <a class="nav-link show-please-wait" href="accounts"><i class="fa fa-user"></i> ACCOUNTS</a>
                 </li>
                 <?php endif; ?>
                 <!--<li class="nav-item">
@@ -185,15 +185,47 @@ class Header {
                             <div class="modal-txt">Level:</div>
                         </div>
                         <div class="col-6 text-left">
-                            <div class="modal-txt m-txt"><?= $fname; ?></div>
-                            <div class="modal-txt m-txt"><?= $sname; ?></div>
-                            <div class="modal-txt m-txt"><?= $email; ?></div>
+                            <div class="modal-txt m-txt txt-fname-display"><?= $fname; ?></div>
+                            <div class="modal-txt m-txt txt-sname-display"><?= $sname; ?></div>
+                            <div class="modal-txt m-txt txt-email-display"><?= $email; ?></div>
                             <div class="modal-txt m-txt"><?= $levelType; ?></div>
+                        </div>
+                        <div class="col-12 text-left">
+                          <div class="mt-3 mb-3 float-right"><button class="btn-edit-info btn btn-sm btn-default"><i class="fa fa-edit"></i> Edit Info</button></div>
+                        </div>
+                        <div class="edit-info col-12 text-left">
+                          <form action="" method="POST" id="editinfo" role="form">
+                              <!--<form action="pos" method="POST">-->
+                              <div class="form-group row">
+                                  <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">First name:</label>
+                                  <div class="col-sm-8">
+                                    <input type="text" name="c_firstname" id="c_firstname" value="<?= strtolower($fname); ?>" class="form-control form-control-sm" autocomplete="off" placeholder="First name" maxlength="25" required>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Last name:</label>
+                                  <div class="col-sm-8">
+                                    <input type="text" name="c_lastname" id="c_lastname" value="<?= strtolower($sname); ?>" class="form-control form-control-sm" autocomplete="off" placeholder="Last name" maxlength="25" required>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-right">Email:</label>
+                                  <div class="col-sm-8">
+                                    <input type="email" name="c_email" id="c_email" value="<?= $email; ?>" class="form-control form-control-sm" autocomplete="off" placeholder="Email" maxlength="25" required>
+                                  </div>
+                              </div>
+                              <div class="form-group row">
+                                  <div class="col-sm-4"></div>
+                                  <div class="col-sm-8 smooth-scroll">
+                                    <button type="submit" id="btn-edit-info-save" class="btn btn-sm btn-info float-right"><i class="fa fa-edit"></i> Save</button>
+                                  </div>
+                              </div>
+                          </form>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-info btn-sm" data-dismiss="modal"><i class="fa fa-window-close"></i> Close</button>
+                    <button class="btn btn-default btn-sm" data-dismiss="modal"><i class="fa fa-window-close"></i> Close</button>
                 </div>
             </div>
         </div>
@@ -266,7 +298,7 @@ class Header {
                         <li class="m-header-main-menu-li m-header-main-menu-li-transaction-log"><i class="fa fa-desktop text-success"></i><span style="padding-left:21px;">TRANSACTION LOG</span></li>
                         <li class="m-header-main-menu-li m-header-main-menu-li-return-items"><i class="fa fa-undo-alt text-danger"></i><span style="padding-left:24px;">RETURN ITEMS</span></li>
                         <?php if($level == 1): ?>
-                        <li class="m-header-main-menu-li">&nbsp;<i class="fa fa-user text-warning"></i><span style="padding-left:21px;">ACCOUNTS</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-accounts">&nbsp;<i class="fa fa-user text-warning"></i><span style="padding-left:21px;">ACCOUNTS</span></li>
                         <?php endif;?>
                     </ul>
                 </div>
