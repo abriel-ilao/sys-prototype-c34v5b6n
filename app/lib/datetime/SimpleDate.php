@@ -4,7 +4,7 @@ namespace app\lib\datetime
 {
 
 	use \DateTime;
-
+	
 	class SimpleDate
 	{
 

@@ -153,7 +153,7 @@ class Header {
                 <li class="nav-item <?=@$item4;?>">
                     <a class="nav-link show-please-wait" href="returnitems"><i class="fa fa-undo-alt"></i> RETURN ITEMS</a>
                 </li>
-                <?php if($level == 1) : ?>
+                <?php if($level == 1 || $level == 2) : ?>
                 <li class="nav-item <?=@$item5;?>">
                     <a class="nav-link show-please-wait" href="accounts"><i class="fa fa-user"></i> ACCOUNTS</a>
                 </li>
@@ -218,6 +218,7 @@ class Header {
                                   <div class="col-sm-4"></div>
                                   <div class="col-sm-8 smooth-scroll">
                                     <button type="submit" id="btn-edit-info-save" class="btn btn-sm btn-info float-right"><i class="fa fa-edit"></i> Save</button>
+                                    <a class="btn btn-sm alert-success-save alert-success float-right mr-2"><i class="fa fa-check"></i> Saved!</a>  
                                   </div>
                               </div>
                           </form>
@@ -297,7 +298,7 @@ class Header {
                         <?php endif; ?>
                         <li class="m-header-main-menu-li m-header-main-menu-li-transaction-log"><i class="fa fa-desktop text-success"></i><span style="padding-left:21px;">TRANSACTION LOG</span></li>
                         <li class="m-header-main-menu-li m-header-main-menu-li-return-items"><i class="fa fa-undo-alt text-danger"></i><span style="padding-left:24px;">RETURN ITEMS</span></li>
-                        <?php if($level == 1): ?>
+                        <?php if($level == 1 || $level == 2): ?>
                         <li class="m-header-main-menu-li m-header-main-menu-li-accounts">&nbsp;<i class="fa fa-user text-warning"></i><span style="padding-left:21px;">ACCOUNTS</span></li>
                         <?php endif;?>
                     </ul>

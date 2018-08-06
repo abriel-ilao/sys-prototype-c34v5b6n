@@ -30,6 +30,9 @@ require_once 'app/lib/xss/vendor/ezyang/htmlpurifier/library/HTMLPurifier.auto.p
 //datetime
 require_once 'app/lib/datetime/SimpleDate.php';
 
+//datetime
+require_once 'app/lib/carbon/SimpleCarbon.php';
+
 //encryption
 require_once 'app/lib/encryption/Encryption.php';
 
@@ -52,14 +55,15 @@ require_once 'app/lib/validation/validator/MinStr.php';
 require_once 'app/lib/validation/validator/RequiredStr.php';
 require_once 'app/lib/validation/validator/UniqueStr.php';
 
+/******************** Accounts ********************/
+require_once 'app/data/accounts/AccountsModel.php';
+require_once 'app/data/accounts/Accounts.php';
 
 /******************** Change Password ********************/
-require_once 'app/data/accounts/AccountsChangePassModel.php';
 require_once 'app/data/accounts/AccountsChangePass.php';
 
 /******************** Edit Info ********************/
 require_once 'app/data/accounts/AccountsEditInfo.php';
-require_once 'app/data/accounts/AccountsEditInfoModel.php';
 
 /******************** Inventory ********************/
 require_once 'app/data/inventory/InventoryModel.php';

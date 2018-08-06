@@ -7,7 +7,7 @@ table {
 	background-color:#ffffff !important;
 }
 
-.edit-info {
+.edit-info, .alert-success-save {
 	display:none;
 }
 

@@ -43,6 +43,13 @@ class Footer {
         }
         btnEditInfo();
 
+        function inputFocusEditInfo() {
+          $("input#c_firstname, input#c_lastname, input#c_email").focus(function() {
+              $('.alert-success-save').fadeOut();
+          });
+        }
+        inputFocusEditInfo();
+
         function editInfo() {
           $('#editinfo').submit(function(e) {
 
@@ -65,6 +72,9 @@ class Footer {
                       //hide please wait
                       $('.wrapper-please-wait').hide();
                       $('.please-wait').hide();
+
+                      //alert save-success
+                      $('.alert-success-save').fadeIn();
 
                       //account info
                       var fname = __ucwords(__strtolower($('#c_firstname').val()));
