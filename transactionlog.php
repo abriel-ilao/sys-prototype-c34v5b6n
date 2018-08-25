@@ -352,7 +352,7 @@ $month = SimpleDate::Create()->getFormat('m');
 		$.ajax({
 				url:'server-ajax/transactionlogajax-'+m,
 				method:"post",
-				data:{year:selectedYear, month:m, level:level},
+				data:{year:selectedYear, month:m, level:level, hideLog:0},
 				success:function(data)
 				{
 					//please wait

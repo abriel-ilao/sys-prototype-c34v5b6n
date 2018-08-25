@@ -2,7 +2,7 @@
 
 if(!isset($_COOKIE['e1ee8d72a7a553f68c2ce3beb7ad19c9'])) :
     require_once './frontend-ui/password.php';
-    //init pattern lock
+    //init pin lock
     Password::Create();
     //prevent displaying the main page
     die();

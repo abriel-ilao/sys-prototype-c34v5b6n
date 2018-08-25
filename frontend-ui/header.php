@@ -134,7 +134,7 @@ class Header {
 
                 <?php if($level == 1 || $level == 2) : ?>
                 <li class="nav-item <?=@$item1;?>">
-                    <a class="nav-link show-please-wait" href="#"><i class="fa fa-calculator"></i> SALES REPORT</a>
+                    <a class="nav-link show-please-wait" href="salesreport"><i class="fa fa-calculator"></i> SALES REPORT</a>
                 </li>
                 <?php endif; ?>
                 <li class="nav-item <?=@$item2;?>">
@@ -218,7 +218,7 @@ class Header {
                                   <div class="col-sm-4"></div>
                                   <div class="col-sm-8 smooth-scroll">
                                     <button type="submit" id="btn-edit-info-save" class="btn btn-sm btn-info float-right"><i class="fa fa-edit"></i> Save</button>
-                                    <a class="btn btn-sm alert-success-save alert-success float-right mr-2"><i class="fa fa-check"></i> Saved!</a>  
+                                    <a class="btn btn-sm alert-success-save alert-success float-right mr-2"><i class="fa fa-check"></i> Saved!</a>
                                   </div>
                               </div>
                           </form>
@@ -276,7 +276,7 @@ class Header {
                 <div class="col-12">
                     <ul class="m-header-main-menu-list">
                         <?php if($level == 1 || $level == 2): ?>
-                        <li class="m-header-main-menu-li"><i class="fa fa-calculator text-info"></i><span style="padding-left:26px;">SALES REPORT</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-sales-report"><i class="fa fa-calculator text-info"></i><span style="padding-left:26px;">SALES REPORT</span></li>
                         <?php endif; ?>
                         <?php if($level == 1 || $level == 2) : ?>
                         <li class="m-header-main-menu-li m-header-main-menu-li-inventory">

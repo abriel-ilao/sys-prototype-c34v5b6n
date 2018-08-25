@@ -425,7 +425,6 @@ Footer::Create();
     <script type="text/javascript">
          var active;
          active = "'.$active.'";
-         console.log(active);
     </script>';
     ?>
     <script type="text/javascript">

@@ -400,12 +400,14 @@ print '
                   $('.transact-error').fadeIn().text('Invalid input... please review the items.');
                 }
 
+                /*
                 if(calc.qItem > calc.qAvailableStock)
                 {
                   calc.errorStock++;
                   $('#q-item-'+indexCookie[i]).addClass('is-invalid');
                   $('.transact-error').fadeIn().text('Input > stock... please review the items.');
                 }
+                */
               }
 
               //if input validations are successful

@@ -144,12 +144,13 @@ class Footer {
           });
         }
 
-        //main menu => inventory -> sub link | transactionlog | returnitems | accounts
+        //main menu => inventory -> sub link | sales report | transactionlog | returnitems | accounts
         main_menu_link('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(1)', 'pos');
         main_menu_link('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(2)', 'inventory');
         main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-transaction-log', 'transactionlog');
         main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-return-items', 'returnitems');
         main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-accounts', 'accounts');
+        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-sales-report', 'salesreport');
 
         // back to top smooth-scroll
         function scrollBackToTop(backToTop) {

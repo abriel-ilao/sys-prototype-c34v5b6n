@@ -402,6 +402,14 @@ Footer::Create();
             });
         }
     </script>
+    <?php
+    //get the active value
+    print '
+    <script type="text/javascript">
+         var active;
+         active = "'.$active.'";
+    </script>';
+    ?>
     <script type="text/javascript">
         $(document).ready(function()
         {
@@ -412,7 +420,7 @@ Footer::Create();
                 $.ajax({
                     url:"server-ajax/inventorysearchajax",
                     method:"post",
-                    data:{query:query, level:level},
+                    data:{query:query, level:level, active:active},
                     success:function(data)
                     {
                         $('#searchResult').html(data);

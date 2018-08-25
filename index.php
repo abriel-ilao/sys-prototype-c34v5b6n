@@ -48,6 +48,10 @@ Flight::route('/accounts', function(){
     include 'accounts.php';
 });
 
+Flight::route('/salesreport', function(){
+    include 'salesreport.php';
+});
+
 /* server-ajax requests */
 Flight::route('/server-ajax/accounteditinfoajax', function(){
     include './server-ajax/accounteditinfoajax.php';
