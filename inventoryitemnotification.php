@@ -21,7 +21,7 @@ $active = '0';
 //init header with one parameter
 Header::Create($active);
 
-?> 
+?>
 
     <div class="header-sub mb-2">
         <div class="container">
@@ -33,7 +33,7 @@ Header::Create($active);
                     <!--<form class="form-inline">-->
                     <div class="col-auto">
                       <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
-                      <div class="input-group">                         
+                      <div class="input-group">
                         <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="fa fa-search"></i></div>
@@ -52,7 +52,7 @@ Header::Create($active);
                     <!--<form class="form-inline">-->
                     <div class="col-auto">
                       <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
-                      <div class="input-group">                         
+                      <div class="input-group">
                         <input type="text" class="form-control" id="m-searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)">
                         <div class="input-group-prepend">
                           <div class="input-group-text"><i class="fa fa-search"></i></div>
@@ -66,17 +66,17 @@ Header::Create($active);
 
     <div class="container panel-x container-search mb-2">
         <div class="row">
-            <div class="col-12">         
-                <div id="searchResult"></div> 
+            <div class="col-12">
+                <div id="searchResult"></div>
             </div>
         </div>
     </div>
 
     <div class="container panel-x">
         <div class="row">
-           <div class="col-12">                
-                <div class="inventory-item-notification">                   
-                </div> 
+           <div class="col-12">
+                <div class="inventory-item-notification">
+                </div>
            </div>
         </div>
     </div>
@@ -102,7 +102,7 @@ Footer::Create();
                   //setTimeout(worker, 3000);
                 }
             });
-        })();  
+        })();
     }
 </script>
 <script type="text/javascript">
@@ -122,7 +122,7 @@ Footer::Create();
               }
           });
       }
-      
+
       $('#searchText, #m-searchText').keyup(function() {
           var search = $(this).val();
           if(search != '')
@@ -132,19 +132,19 @@ Footer::Create();
           }
           else
           {
-              $('.container-search').hide();        
+              $('.container-search').hide();
           }
-      });  
+      });
   });
 </script>
 
 <?php
 
-else: 
+else:
     require_once 'login-form.php';
-endif; 
+endif;
 
-?> 
-   
+?>
+
 </body>
 </html>

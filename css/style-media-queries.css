@@ -152,8 +152,8 @@ header.m-nav .m-header-main-menu ul.m-header-main-menu-list {
 }
 
 header.m-nav .m-header-main-menu ul.m-header-main-menu-list li.m-header-main-menu-li {
-	padding-top:12px;
-	padding-bottom:12px;
+	padding-top:9px;
+	padding-bottom:9px;
 	border-bottom:1px solid #ced6e0;
 	cursor:pointer;
 }
@@ -236,7 +236,6 @@ div.m-search {
 		display:none;
 	}
 }
-
 
 @media (max-width: 376px) {
 	.please-wait {

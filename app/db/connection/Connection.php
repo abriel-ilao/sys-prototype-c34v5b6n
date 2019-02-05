@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
 * Create a new database connection instance
 */
@@ -13,9 +13,9 @@ namespace app\db\connection {
         define ( 'DB_PASSWORD', '' );
         define ( 'DB_NAME', 'db_sys_hardware' );*/
 
-        /* 
+        /*
         ******************* MySQL Settings Configuration *******************
-        **** @$_IP - MySQL database hostname 
+        **** @$_IP - MySQL database hostname
         **** @$_ROOT - MySQL database username
         **** @$_PASSWORD - MySQL database password
         **** @$_DB - Mysql database name
@@ -25,14 +25,14 @@ namespace app\db\connection {
                        $_ROOT = 'root',
                        $_PASSWORD = '',
                        $_DB = 'db_sys_hardware';  
-                       
+
         /*******************************************************************/
-                       
+
         /**
         * Establish a database connection.
         * @static
         * @return PDO Connection
-        */              
+        */
         private static function createConnection() {
             try {
                 return new PDO(self::getConnectionString(), self::getUser(), self::getPassword());
@@ -43,29 +43,29 @@ namespace app\db\connection {
 
         /**
         * Connect
-        * @static 
+        * @static
         * @return Database connection
         */
         public static function Connect() {
             return self::createConnection();
-        }    
+        }
 
-        /** 
+        /**
         * Connection string concatenation
         * @static
         * @return string IP and DB
         */
-        private static function getConnectionString() { 
-            return 'mysql:host='.self::getIP().'; dbname='.self::getDB(); 
+        private static function getConnectionString() {
+            return 'mysql:host='.self::getIP().'; dbname='.self::getDB();
         }
 
         /**
-        * IP 
+        * IP
         * @static
         * @return string
         */
-        private static function getIP() { 
-            return self::$_IP; 
+        private static function getIP() {
+            return self::$_IP;
         }
 
         /**
@@ -73,8 +73,8 @@ namespace app\db\connection {
         * @static
         * @return string
         */
-        private static function getDB() { 
-            return self::$_DB; 
+        private static function getDB() {
+            return self::$_DB;
         }
 
         /**
@@ -82,7 +82,7 @@ namespace app\db\connection {
         * @static
         * @return string
         */
-        private static function getUser() { 
+        private static function getUser() {
             return self::$_ROOT;
         }
 
@@ -91,8 +91,8 @@ namespace app\db\connection {
         * @static
         * @return string
         */
-        private static function getPassword() { 
-            return self::$_PASSWORD; 
+        private static function getPassword() {
+            return self::$_PASSWORD;
         }
 
         /**
@@ -101,5 +101,3 @@ namespace app\db\connection {
         private function __construct() {}
     }
 }
-
-

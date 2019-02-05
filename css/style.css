@@ -286,6 +286,32 @@ span#totalItems {
 	display:none;
 }
 
+/* Daily Expenses */
+.ex_odd {
+	background-color:#fff2e6 !important;
+}
+.ex_even {
+	background-color:#e6faff !important;
+}
+.ex_total {
+	background-color:#ccffcc !important;
+}
+
+/* Date picker ui */
+.ui-datepicker-prev, .ui-datepicker-prev:hover {
+	background-image:url('../img/prev.png') !important;
+	background-repeat:no-repeat;
+	background-position:center;
+	cursor:pointer;
+}
+
+.ui-datepicker-next, .ui-datepicker-next:hover {
+	background-image:url('../img/next.png') !important;
+	background-repeat:no-repeat;
+	background-position:center;
+	cursor:pointer;
+}
+
 /* bootstrap */
 .modal-dialog,
 .modal-content {

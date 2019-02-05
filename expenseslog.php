@@ -5,7 +5,7 @@ require_once './frontend-ui/header.php';
 require_once './frontend-ui/footer.php';
 
 use app\controller\accounts\AccountsAdminInfoController;
-use app\data\transaction\TransactionLog;
+use app\data\dailyexpenses\ExpensesLog;
 use app\lib\datetime\SimpleDate;
 
 if($auth) :
@@ -13,61 +13,95 @@ if($auth) :
 //init user's info controller
 $accountData = AccountsAdminInfoController::Create();
 
-//init transactionlog
-$transactLog = TransactionLog::Create();
+//init ExpensesLog - view daily expenses
+$ExpensesLog = ExpensesLog::Create();
 
 //get user's level
 $level = $accountData->getData('level');
 
+//get user's ID
+$userID = $accountData->getData('Id');
+
 //active navigation
-$active = '3';
+$active = '6';
 
 //init header with one parameter
 Header::Create($active);
 
 ?>
-	<div class="header-pad">
-		<div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-6">
-                    <h1 class="h6 mt-2"><i class="fa fa-desktop"></i> Transaction Log</h1>
-                </div>
-            </div>
-        </div>
-	</div>
 
     <div class="header-sub mb-2">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-6">
-                    <h1 class="h6 mt-2"><i class="fa fa-desktop"></i> Transaction Log</h1>
-                </div>
-                <div class="col-12 col-lg-6">
-                </div>
+              <?php
+                if($level == 1 || $level == 2):
+              ?>
+                  <div class="col-sm-8 col-md-6">
+                      <div class="pos-sub-item">
+                        <ul>
+                          <li><a href="dailyexpenses"><i class="fa fa-cart-arrow-down"></i> Add Expenses</a></li>
+                          <li><a href="expenseslog" class="active-sub-item"><i class="fa fa-shopping-bag"></i> Expenses Log</a></li>
+                        </ul>
+                      </div>
+                  </div>
+              <?php
+                endif;
+              ?>
+              <div class="col-sm-8 col-md-6">
+                  <!--<form class="form-inline">-->
+                  <div class="col-auto">
+                    <label class="sr-only" for="inlineFormInputGroup">Search Items (Item Code, Desc..., Type, Selling Price)</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control" id="searchText" placeholder="Search Items (Item Code, Desc..., Type, Selling Price)" disabled style="opacity:0">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text" style="opacity:0;"><i class="fa fa-search"></i></div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
         </div>
     </div>
 
+    <div class="header-pad">
+  		<div class="container">
+          <div class="row">
+              <div class="col-12 col-md-6">
+                  <h1 class="h6 mt-2"><i class="fa fa-edit"></i> Expenses Log</h1>
+              </div>
+              <div class="col-12 col-md-6">
+              </div>
+          </div>
+      </div>
+  	</div>
+
     <div class="container panel-x">
+        <?php if($level == 1 || $level == 2) : ?>
   		<div class="row no-gutters">
         <div class="col-12">
           <div class="h6-responsive h-inventory" id="add">
-            <div class="form-group">
-							Select Year:
-              <select class="form-control" id="selectedYear" style="width:100px;">
-                <?= $transactLog->getYear(); ?>
-              </select>
-            </div>
+            <form action="expenseslog" method="POST" role="form">
+              <div class="form-group">
+  							Select Year:
+                <select class="form-control" name="selectedYear" style="width:100px;">
+                  <?= $ExpensesLog->getYear();?>
+                </select>
+
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm" name="submitShowTables" id="submitShowTables"><i class="fa fa-calendar-alt"></i> SELECT YEAR</button>
+              <?= $ExpensesLog->getNotification(); ?>
+            </form>
           </div>
+          <?= $ExpensesLog->setYearlyExpenses();?>
         </div>
 				<div class="col-12" id="yearly">
 					<?php
 						if($level == 1 || $level ==2):
-							echo '<img class="div-loader" src="img/34.gif" height="40" width="40"/>';
+							//echo '<img class="div-loader" src="img/34.gif" height="40" width="40"/>';
 						endif;
 					?>
 				</div>
-  			<div class="col-12 col-lg-4">
+  			<div class="col-12">
           <div id="accordion-1" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="jan">
@@ -79,13 +113,13 @@ Header::Create($active);
               </div>
               <div id="january" class="collapse" aria-labelledby="jan" data-parent="#accordionExample">
                 <div class="card-body" id="month-1">
-
+                  <?= $ExpensesLog->getDataTables('m-01'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-        <div class="col-12 col-lg-4">
+        <div class="col-12">
           <div id="accordion-2" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="feb">
@@ -97,13 +131,13 @@ Header::Create($active);
               </div>
               <div id="february" class="collapse" aria-labelledby="feb" data-parent="#accordionExample">
                 <div class="card-body" id="month-2">
-
+                  <?= $ExpensesLog->getDataTables('m-02'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-        <div class="col-12 col-lg-4">
+        <div class="col-12">
           <div id="accordion-3" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="mar">
@@ -115,13 +149,13 @@ Header::Create($active);
               </div>
               <div id="march" class="collapse" aria-labelledby="mar" data-parent="#accordionExample">
                 <div class="card-body" id="month-3">
-
+                  <?= $ExpensesLog->getDataTables('m-03'); ?>
                 </div>
               </div>
             </div>
           </div>
         </div>
-  			<div class="col-12 col-lg-4">
+  			<div class="col-12">
 					<div id="accordion-4" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="apr">
@@ -133,13 +167,13 @@ Header::Create($active);
               </div>
               <div id="april" class="collapse" aria-labelledby="apr" data-parent="#accordionExample">
                 <div class="card-body" id="month-4">
-
+                  <?= $ExpensesLog->getDataTables('m-04'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-        <div class="col-12 col-lg-4">
+        <div class="col-12">
 					<div id="accordion-5" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="_may">
@@ -151,13 +185,13 @@ Header::Create($active);
               </div>
               <div id="may" class="collapse" aria-labelledby="_may" data-parent="#accordionExample">
                 <div class="card-body" id="month-5">
-
+                  <?= $ExpensesLog->getDataTables('m-05'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-        <div class="col-12 col-lg-4">
+        <div class="col-12">
 					<div id="accordion-6" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="jun">
@@ -169,13 +203,13 @@ Header::Create($active);
               </div>
               <div id="june" class="collapse" aria-labelledby="jun" data-parent="#accordionExample">
                 <div class="card-body" id="month-6">
-
+                  <?= $ExpensesLog->getDataTables('m-06'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-				<div class="col-12 col-lg-4">
+				<div class="col-12">
 					<div id="accordion-7" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="jul">
@@ -187,13 +221,13 @@ Header::Create($active);
               </div>
               <div id="july" class="collapse" aria-labelledby="jul" data-parent="#accordionExample">
                 <div class="card-body" id="month-7">
-
+                  <?= $ExpensesLog->getDataTables('m-07'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-				<div class="col-12 col-lg-4">
+				<div class="col-12">
 					<div id="accordion-8" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="aug">
@@ -205,13 +239,13 @@ Header::Create($active);
               </div>
               <div id="august" class="collapse" aria-labelledby="aug" data-parent="#accordionExample">
                 <div class="card-body" id="month-8">
-
+                  <?= $ExpensesLog->getDataTables('m-08'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-				<div class="col-12 col-lg-4">
+				<div class="col-12">
 					<div id="accordion-9" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="sept">
@@ -223,13 +257,13 @@ Header::Create($active);
               </div>
               <div id="september" class="collapse" aria-labelledby="sept" data-parent="#accordionExample">
                 <div class="card-body" id="month-9">
-
+                  <?= $ExpensesLog->getDataTables('m-09'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-				<div class="col-12 col-lg-4">
+				<div class="col-12">
 					<div id="accordion-10" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="oct">
@@ -241,13 +275,13 @@ Header::Create($active);
               </div>
               <div id="october" class="collapse" aria-labelledby="oct" data-parent="#accordionExample">
                 <div class="card-body" id="month-10">
-
+                  <?= $ExpensesLog->getDataTables('m-10'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-				<div class="col-12 col-lg-4">
+				<div class="col-12">
 					<div id="accordion-11" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="nov">
@@ -259,13 +293,13 @@ Header::Create($active);
               </div>
               <div id="november" class="collapse" aria-labelledby="nov" data-parent="#accordionExample">
                 <div class="card-body" id="month-11">
-
+                  <?= $ExpensesLog->getDataTables('m-11'); ?>
                 </div>
               </div>
             </div>
           </div>
   			</div>
-				<div class="col-12 col-lg-4">
+				<div class="col-12">
 					<div id="accordion-12" class="accordion m-2">
             <div class="card">
               <div class="card-header" id="dec">
@@ -277,7 +311,7 @@ Header::Create($active);
               </div>
               <div id="december" class="collapse" aria-labelledby="dec" data-parent="#accordionExample">
                 <div class="card-body" id="month-12">
-
+                  <?= $ExpensesLog->getDataTables('m-12');?>
                 </div>
               </div>
             </div>
@@ -285,110 +319,47 @@ Header::Create($active);
   			</div>
   		</div>
     </div>
+    <?php endif; ?>
+  </div>
 
 <?php
-
 Footer::Create();
+?>
+<!-- delete - selected expenses -->
+<script type="text/javascript">
+  $(document).ready(function()
+    {
+      $('.btn-delete-expenses-item').click(function(e) {
+        //preventing a page refresh
+        e.preventDefault();
+        //please wait
+            //$('.wrapper-please-wait').show();
+            //$('.please-wait').show();
 
+          var target_id = $(this).attr("data-id");
+            $('#selected-expenses-item-'+target_id).remove();
+
+          $.ajax({
+              url: "server-ajax/dailyexpensesdelajax",
+              type: "POST",
+              data: "id_expenses_item=" + target_id,
+              success: function() {
+                //hide please wait
+                  //$('.wrapper-please-wait').hide();
+                  //$('.please-wait').hide();
+
+                  console.log("AJAX request was successful - action=DELETE");
+              },
+              error:function() {
+                console.log("AJAX request was a failure - action=DELETE");
+            }
+          });
+       });
+    });
+</script>
+<?php
 $month = SimpleDate::Create()->getFormat('m');
 
-?>
-
-<script type="text/javascript">
-
-	var level = <?php echo $level; ?>
-
-	$(document).ready(function() {
-		//**default year value
-		//get selected year value
-		var yyyy = $('#selectedYear').val();
-		//init yearly,monthly,reloadData
-		yearly(yyyy);
-		monthly(yyyy);
-		reloadData(yyyy);
-
-		$('#selectedYear').change(function()
-		{
-			//please wait
-			$('.wrapper-please-wait').show();
-			$('.please-wait').show();
-
-			var selectedYear = $(this).val();
-			monthly(selectedYear);
-			yearly(selectedYear);
-			reloadData(selectedYear);
-		});
-	});
-
-	function reloadData(selectedYear) {
-
-		var btnReload = function(m) {
-			$('#reloadMonth-'+m).click(function(e) {
-				//please wait
-				$('.wrapper-please-wait').show();
-				$('.please-wait').show();
-
-				e.preventDefault();
-				transactionLog(selectedYear, m);
-			});
-		}
-
-		for(var m=1; m <= 12; m++)
-		{
-			btnReload(m);
-		}
-	}
-
-	function monthly(selectedYear)
-	{
-		for(var m=1; m <= 12; m++)
-		{
-			transactionLog(selectedYear, m);
-		}
-	}
-
-	function transactionLog(selectedYear, m) {
-		//alert(value);
-		$.ajax({
-				url:'server-ajax/transactionlogajax-'+m,
-				method:"post",
-				data:{year:selectedYear, month:m, level:level, hideLog:0},
-				success:function(data)
-				{
-					//please wait
-					$('.wrapper-please-wait').hide();
-					$('.please-wait').hide();
-
-					$('#month-'+m).html(data);
-				},
-				error:function(){
-						$('#month-'+m).html('');
-
-						console.log('Error month'+m);
-
-						$('#month-'+m).append('<button id="reloadMonth-'+m+'" class="btn btn-warning btn-sm"><strong>Reload Data</strong></button>');
-
-						reloadData(selectedYear);
-				}
-		});
-	}
-
-	function yearly(selectedYear) {
-		//alert(value);
-		$.ajax({
-				url:"server-ajax/transactionlogyearajax",
-				method:"post",
-				data:{year:selectedYear, level:level},
-				success:function(data)
-				{
-					$('#yearly').html(data);
-				}
-		});
-	}
-
-</script>
-
-<?php
  //get the current month
  print '
  <script type="text/javascript">
@@ -418,6 +389,9 @@ else:
 endif;
 
 ?>
+
+</body>
+</html>
 
 </body>
 </html>

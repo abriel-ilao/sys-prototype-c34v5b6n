@@ -463,6 +463,11 @@ Footer::Create();
     <script type="text/javascript">
       $(document).ready(function()
        {
+        $("#schedDate").focus(function()
+        {
+         $(this).removeClass('is-invalid');
+        });
+
         $(".input-quantity").focus(function()
         {
           $(this).removeClass('is-invalid');
@@ -670,69 +675,75 @@ Footer::Create();
               * dom manipulation
               */
 
+              //check if date is empty
+              if($('#schedDate').val() == '' || $('#schedDate').val().includes('/') == false)
+              {
+                $('#schedDate').addClass('is-invalid');
+                $('.transact-error').fadeIn().text('Date field is empty!');
+              } else {
               //input validation for item quantity and item stock
               //find the existing item in a cookie array values
-              for (var i = 1; i < indexCookie.length; i++)
-              {
-                //input - available stock
-                calc.qAvailableStock = Number($('#q-available-stock-'+indexCookie[i]).val());
-                //input - quantity
-                calc.qItem = Number($('#q-item-'+indexCookie[i]).val());
-                //find [.] in input quantity
-                calc.qItemIndexDot = Number($('#q-item-'+indexCookie[i]).val().indexOf('.'));
-
-                //validate
-                if(calc.qItem == '' || calc.qItem == 0 || calc.qItem < 0 || calc.qItemIndexDot != -1)
-                {
-                  calc.errorQuantity++;
-                  $('#q-item-'+indexCookie[i]).addClass('is-invalid');
-                  $('.transact-error').fadeIn().text('Invalid input... please review the items.');
-                }
-
-                if(calc.qItem > calc.qAvailableStock)
-                {
-                  calc.errorStock++;
-                  $('#q-item-'+indexCookie[i]).addClass('is-invalid');
-                  $('.transact-error').fadeIn().text('Input > stock... please review the items.');
-                }
-              }
-
-              //if input validations are successful
-              //if there are no errors in checking #q-item id - [q!=(n.n..., 0,'','a-z,A-Z', '!@#$%^&*()~ and so on...')]
-              //if input quantity is greater than a. stock
-              if(calc.errorQuantity == 0 && calc.errorStock == 0)
-              {
-                //input validation for item quantity and item stock
                 for (var i = 1; i < indexCookie.length; i++)
                 {
-                  //input - description
-                  calc.desc = __ucwords(__strtolower($('#description-'+indexCookie[i]).val()));
-                  //input - quantity item
+                  //input - available stock
+                  calc.qAvailableStock = Number($('#q-available-stock-'+indexCookie[i]).val());
+                  //input - quantity
                   calc.qItem = Number($('#q-item-'+indexCookie[i]).val());
-                  //input - selling price
-                  calc.sPrice = Number($('#selling-price-'+indexCookie[i]).val());
-                  //input - total items
-                  calc.totalItems = Number($('#transactTotalItems').text());
+                  //find [.] in input quantity
+                  calc.qItemIndexDot = Number($('#q-item-'+indexCookie[i]).val().indexOf('.'));
 
-                  //compute total price
-                  calc.totalPrice = calc.qItem * calc.sPrice;
-                  //compute total
-                  calc.total += calc.totalPrice;
+                  //validate
+                  if(calc.qItem == '' || calc.qItem == 0 || calc.qItem < 0 || calc.qItemIndexDot != -1)
+                  {
+                    calc.errorQuantity++;
+                    $('#q-item-'+indexCookie[i]).addClass('is-invalid');
+                    $('.transact-error').fadeIn().text('Invalid input... please review the items.');
+                  }
 
-                  $('.transactCompute').fadeIn().append(
-                    '<p><strong>'+calc.desc+'</strong><br>Quantity: <strong>'+__numberWithCommas(calc.qItem)+'</strong><br>Selling price: <strong>₱'+__numberWithCommas(calc.sPrice)+'</strong><br>Total Price: <strong>₱'+__numberWithCommas(calc.totalPrice.toFixed(1))+'</strong><hr></p>');
+                  if(calc.qItem > calc.qAvailableStock)
+                  {
+                    calc.errorStock++;
+                    $('#q-item-'+indexCookie[i]).addClass('is-invalid');
+                    $('.transact-error').fadeIn().text('Input > stock... please review the items.');
+                  }
                 }
 
-                $('.transactCompute').append('<strong><span style="color:#3742fa;">'+'Total: ₱'+__numberWithCommas(calc.total.toFixed(1))+'</span></strong><hr>');
+                //if input validations are successful
+                //if there are no errors in checking #q-item id - [q!=(n.n..., 0,'','a-z,A-Z', '!@#$%^&*()~ and so on...')]
+                //if input quantity is greater than a. stock
+                if(calc.errorQuantity == 0 && calc.errorStock == 0)
+                {
+                  //input validation for item quantity and item stock
+                  for (var i = 1; i < indexCookie.length; i++)
+                  {
+                    //input - description
+                    calc.desc = __ucwords(__strtolower($('#description-'+indexCookie[i]).val()));
+                    //input - quantity item
+                    calc.qItem = Number($('#q-item-'+indexCookie[i]).val());
+                    //input - selling price
+                    calc.sPrice = Number($('#selling-price-'+indexCookie[i]).val());
+                    //input - total items
+                    calc.totalItems = Number($('#transactTotalItems').text());
 
-                $('.transactCompute').append('<div class="mt-2 mb-2"><strong>OR Number:</strong><input type="number" id="transact-or-num" class="form-control" placeholder="OR Number..." style="width:140px;"></div>');
+                    //compute total price
+                    calc.totalPrice = calc.qItem * calc.sPrice;
+                    //compute total
+                    calc.total += calc.totalPrice;
 
-                //hide checkout button
-                $('.btn-checkout').hide();
-                //show transact button
-                $('.btn-transact-items').fadeIn();
+                    $('.transactCompute').fadeIn().append(
+                      '<p><strong>'+calc.desc+'</strong><br>Quantity: <strong>'+__numberWithCommas(calc.qItem)+'</strong><br>Selling price: <strong>₱'+__numberWithCommas(calc.sPrice)+'</strong><br>Total Price: <strong>₱'+__numberWithCommas(calc.totalPrice.toFixed(1))+'</strong><hr></p>');
+                  }
+
+                  $('.transactCompute').append('<strong><span style="color:#3742fa;">'+'Total: ₱'+__numberWithCommas(calc.total.toFixed(1))+'</span></strong><hr>');
+
+                  $('.transactCompute').append('<div class="mt-2 mb-2"><strong>OR Number:</strong><input type="number" id="transact-or-num" class="form-control" placeholder="OR Number..." style="width:140px;"></div>');
+
+                  //hide checkout button
+                  $('.btn-checkout').hide();
+                  //show transact button
+                  $('.btn-transact-items').fadeIn();
+                }
               }
-
               /*
               * end dom manipulation
               */
@@ -783,6 +794,7 @@ Footer::Create();
               };
 
               var insert = {
+                sched_date : $('#schedDate').val(),
                 cookieId : '',
                 or_number : '',
                 userId : '',
@@ -889,13 +901,15 @@ Footer::Create();
                 $.ajax({
                     url: "server-ajax/transactajax",
                     type: "POST",
-                    data: {cookie_id: insert.cookieId, item_code: insert.item_code, or_number: insert.or_number, description: insert.description, material_type: insert.material_type, quantity: insert.quantity, selling_price: insert.selling_price, total_price: insert.total_price, profit: insert.profit, total_profit: insert.total_profit, total: insert.total, userId: insert.userId},
+                    data: {cookie_id: insert.cookieId, item_code: insert.item_code, or_number: insert.or_number, description: insert.description, material_type: insert.material_type, quantity: insert.quantity, selling_price: insert.selling_price, total_price: insert.total_price, profit: insert.profit, total_profit: insert.total_profit, total: insert.total, userId: insert.userId, sched_date: insert.sched_date},
                     success: function() {
                         //hide please wait
                         $('.wrapper-please-wait').hide();
                         $('.please-wait').hide();
                         //show successful message
                         $('.transact-success').fadeIn().html('<span style="color:#16a085;"><strong>Transaction was successful</strong></span>');
+                        //disable date
+                        $('#schedDate').attr('disabled', 'disabled');
                         //disable or number
                         $('#transact-or-num').attr('disabled', 'disabled');
                         //disable input quantity

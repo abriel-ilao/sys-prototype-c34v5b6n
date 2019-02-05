@@ -42,24 +42,23 @@ $login = AccountsAdminLoginController::Create();
   </head>
   <body class="text-center">
     <form class="form-signin" action="" method="POST">
-        <h2 class="pt-4 pb-4">[LOGO]</h2>
+        <h2 class="pt-4 pb-4"><img src="img/logo1.png" class="img-fluid" alt="Logo"></h2>
+        <div class="checkbox mb-3">
+            <!--<label class="forgot-account">-->
+              <!--<a href="#">Forgot Account?</a>-->
+              <div class="text-center">
+                  <?= $login->login('username', 'password', 'CSRFtoken'); ?>
+              </div>
+            <!--</label>-->
+        </div>
         <label for="inputUsername" class="sr-only">Username address</label>
         <input type="text" id="inputUsername" class="form-control mb-3 active" name="username" placeholder="Username" autocomplete="off" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
         <input name="CSRFtoken" type="hidden" value="<?=$token;?>">
 
-        <div class="checkbox mb-3">
-            <label class="forgot-account">
-              <a href="#">Forgot Account?</a>
-            </label>
-        </div>
-
         <button class="btn btn-lg btn-info btn-block" type="submit" name="sub"><i class="fa fa-sign-in-alt"></i> Log In</button>
 
-        <div class="text-center">
-            <?= $login->login('username', 'password', 'CSRFtoken'); ?>
-        </div>
         <p class="mt-5 mb-3 text-muted">&copy; 2018 </p>
     </form>
 

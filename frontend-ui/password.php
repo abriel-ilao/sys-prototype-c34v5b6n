@@ -140,7 +140,7 @@ class Password {
               msg.hide();
             }, 10000);
             Cookies.set(x, cookieVal, { expires: 130 });
-            window.location.replace('pos');
+            window.location.replace('dailytotal');
         } else
         {
             msg.show();

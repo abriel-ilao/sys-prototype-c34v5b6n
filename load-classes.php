@@ -84,3 +84,12 @@ require_once 'app/data/transaction/TransactionDelReturnItems.php';
 /******************** Return Items ********************/
 require_once 'app/data/returnitems/ReturnItemsAddItem.php';
 require_once 'app/data/returnitems/ReturnItems.php';
+
+/******************** Daily Expenses ********************/
+require_once 'app/data/dailyexpenses/AddExpenses.php';
+require_once 'app/data/dailyexpenses/ExpensesLog.php';
+require_once 'app/data/dailyexpenses/DelExpenses.php';
+
+/******************** Daily Total ********************/
+require_once 'app/data/dailytotal/Dailytotal.php';
+require_once 'app/data/dailytotal/DelDailyTotal.php';

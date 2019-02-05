@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require_once 'load-classes.php';
 
@@ -12,8 +12,6 @@ $session_id = $controller->logout();
 
 Session::UnsetSession($session_id);
 
-header('Location: pos');
+header('Location: dailytotal');
 
 ?>
-
-

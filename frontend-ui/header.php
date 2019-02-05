@@ -25,7 +25,7 @@ class Header {
     ($level == 3) ? $levelType = 'Cashier' : null;
 
     //logo
-    $logoName = 'Logo';
+    $logoName = '<img src="./img/logo-small.png" class="img-fluid">';
 
     //menu focus
     $main_menu = 'active active-highlight';
@@ -51,6 +51,10 @@ class Header {
         $item5 = $main_menu;
         $m_item5 = $m_main_menu;
     }
+    if ($active == 6) {
+        $item6 = $main_menu;
+        $m_item6 = $m_main_menu;
+    }
     //!active
     if($active == 0) {
         $item1 = '';
@@ -58,11 +62,13 @@ class Header {
         $item3 = '';
         $item4 = '';
         $item5 = '';
+        $item6 = '';
         $m_item1 = '';
         $m_item2 = '';
         $m_item3 = '';
         $m_item4 = '';
         $m_item5 = '';
+        $m_item6 = '';
     }
 ?>
 
@@ -82,6 +88,9 @@ class Header {
 
     <!-- Style Media Queries CSS -->
     <link rel="stylesheet" type="text/css" href="./css/style-media-queries.css">
+
+    <!-- jQuery UI CSS -->
+    <link rel="stylesheet" type="text/css" href="./css/jquery-ui.css">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
@@ -105,7 +114,7 @@ class Header {
             <div class="row pt-2 pb-2">
                 <div class="col-12 col-md-2">
                     <div class="logo-brand">
-                        <a class="navbar-brand" href="pos" style="color:#006266;"><strong><?= $logoName; ?></strong></a>
+                        <a class="navbar-brand" href="dailytotal" style="color:#006266;"><strong><?= $logoName; ?></strong></a>
                     </div>
                 </div>
                 <div class="col-12 col-md-2">
@@ -134,7 +143,7 @@ class Header {
 
                 <?php if($level == 1 || $level == 2) : ?>
                 <li class="nav-item <?=@$item1;?>">
-                    <a class="nav-link show-please-wait" href="salesreport"><i class="fa fa-calculator"></i> SALES REPORT</a>
+                    <a class="nav-link show-please-wait" href="dailytotal"><i class="fa fa-calculator"></i> DAILY TOTAL</a>
                 </li>
                 <?php endif; ?>
                 <li class="nav-item <?=@$item2;?>">
@@ -156,6 +165,9 @@ class Header {
                 <?php if($level == 1 || $level == 2) : ?>
                 <li class="nav-item <?=@$item5;?>">
                     <a class="nav-link show-please-wait" href="accounts"><i class="fa fa-user"></i> ACCOUNTS</a>
+                </li>
+                <li class="nav-item <?=@$item6;?>">
+                    <a class="nav-link show-please-wait" href="dailyexpenses"><i class="fa fa-table"></i> DAILY EXPENSES</a>
                 </li>
                 <?php endif; ?>
                 <!--<li class="nav-item">
@@ -237,7 +249,7 @@ class Header {
             <div class="row">
                 <div class="col-6">
                     <div class="m-logo-wrapper text-left">
-                         <a href="pos"><strong><?= $logoName; ?></strong></a>
+                         <a href="daily"><strong><?= $logoName; ?></strong></a>
                     </div>
                 </div>
                 <div class="col-6">
@@ -276,7 +288,7 @@ class Header {
                 <div class="col-12">
                     <ul class="m-header-main-menu-list">
                         <?php if($level == 1 || $level == 2): ?>
-                        <li class="m-header-main-menu-li m-header-main-menu-li-sales-report"><i class="fa fa-calculator text-info"></i><span style="padding-left:26px;">SALES REPORT</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-sales-report"><i class="fa fa-calculator text-info"></i><span style="padding-left:26px;">DAILY TOTAL</span></li>
                         <?php endif; ?>
                         <?php if($level == 1 || $level == 2) : ?>
                         <li class="m-header-main-menu-li m-header-main-menu-li-inventory">
@@ -300,6 +312,8 @@ class Header {
                         <li class="m-header-main-menu-li m-header-main-menu-li-return-items"><i class="fa fa-undo-alt text-danger"></i><span style="padding-left:24px;">RETURN ITEMS</span></li>
                         <?php if($level == 1 || $level == 2): ?>
                         <li class="m-header-main-menu-li m-header-main-menu-li-accounts">&nbsp;<i class="fa fa-user text-warning"></i><span style="padding-left:21px;">ACCOUNTS</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-add-expenses"><i class="fa fa-cart-plus text-success"></i><span style="padding-left:20px;">ADD EXPENSES</span></li>
+                        <li class="m-header-main-menu-li m-header-main-menu-li-expenses-log"><i class="fa fa-desktop text-info"></i><span style="padding-left:20px;">EXPENSES LOG</span></li>
                         <?php endif;?>
                     </ul>
                 </div>
@@ -308,7 +322,7 @@ class Header {
         <div class="container">
             <div class="row">
                 <div class="col-12 text-right">
-                    <button class="btn btn-outline-light btn-sm m-btn-close mt-3"><i class="fa fa-window-close"></i> Close</button>
+                    <button class="btn btn-outline-light btn-sm m-btn-close mt-1"><i class="fa fa-window-close"></i> Close</button>
                 </div>
             </div>
         </div>

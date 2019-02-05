@@ -24,6 +24,7 @@ class Footer {
 
     <!-- Optional JavaScript -->
     <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/jquery-ui.js"></script>
     <script type="text/javascript" src="./js/popper.min.js"></script>
     <script type="text/javascript" src="./js/bootstrap.min.js"></script>
     <script type="text/javascript" src="./js/notify.min.js"></script>
@@ -144,13 +145,15 @@ class Footer {
           });
         }
 
-        //main menu => inventory -> sub link | sales report | transactionlog | returnitems | accounts
+        //main menu => inventory -> sub link | daily total | transactionlog | returnitems | accounts
         main_menu_link('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(1)', 'pos');
         main_menu_link('ul.m-header-main-menu-list-sub .m-header-main-menu-li-sub:nth-child(2)', 'inventory');
         main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-transaction-log', 'transactionlog');
         main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-return-items', 'returnitems');
         main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-accounts', 'accounts');
-        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-sales-report', 'salesreport');
+        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-sales-report', 'dailytotal');
+        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-add-expenses', 'dailyexpenses');
+        main_menu_link('ul.m-header-main-menu-list .m-header-main-menu-li-expenses-log', 'expenseslog');
 
         // back to top smooth-scroll
         function scrollBackToTop(backToTop) {
@@ -233,6 +236,14 @@ class Footer {
         });
       })();
     }
+
+    function datePicker() {
+      $('#schedDate').datepicker({
+        //prevText: "Earlier"
+      });
+
+    }
+    datePicker();
     </script>
 
 <?php
